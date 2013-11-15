@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://ZacksTsang.github.io/atom.xml" rel="self"/>
   <link href="http://ZacksTsang.github.io/"/>
-  <updated>2013-11-08T10:28:26+08:00</updated>
+  <updated>2013-11-15T18:08:50+08:00</updated>
   <id>http://ZacksTsang.github.io/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -14,11 +14,103 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hell World]]></title>
-    <link href="http://ZacksTsang.github.io/blog/2013/11/07/hell-world/"/>
-    <updated>2013-11-07T17:03:00+08:00</updated>
-    <id>http://ZacksTsang.github.io/blog/2013/11/07/hell-world</id>
-    <content type="html"><![CDATA[<h2>Hi,Blog Coming Soon!</h2>
+    <title type="html"><![CDATA[菜鸟学习UINavigation]]></title>
+    <link href="http://ZacksTsang.github.io/blog/2013/11/15/cai-niao-xue-xi-uinavigation/"/>
+    <updated>2013-11-15T11:53:00+08:00</updated>
+    <id>http://ZacksTsang.github.io/blog/2013/11/15/cai-niao-xue-xi-uinavigation</id>
+    <content type="html"><![CDATA[<h2>UINavigation Bar For IOS7</h2>
+
+<p>IOS7中将UINavigation Bar和Status Bar连接在一起，给人呈现一种融为一体的感觉，而不再是独立的一部分。</p>
+
+<p><img class="center" src="http://ZacksTsang.github.io/images/20131115/uinavigation_desc.png"></p>
+
+<p>UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们只需要操作这几个属性，还有leftBarButtonItems,rightBarButtonItems，下面是我们使用UINavigation Bar过程中会经常用到的方法：</p>
+
+<h3>设置背景颜色</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="n">color</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是使用默认的UINavigationController，则在</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">]]];</span><span class="c1">//设置自己的颜色</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在自定义的UINavigationController中，则</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">]]];</span><span class="c1">//设置自己的颜色</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是：如果在子Controller的viewDidLoad中加入此代码时，则会发生切换回其它viewController时，UINavigation Bar背景会改变为子viewController改变的颜色，而当前的viewConroller则不会改变。</p>
+
+<h3>设置背景图片</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackgroundImage:</span><span class="n">image</span> <span class="nl">forBarMetrics:</span><span class="n">UIBarMetricsDefault</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>设置返回的图片</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackIndicatorImage:</span><span class="n">image</span><span class="p">];</span>
+</span><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackIndicatorTransitionMaskImage:</span><span class="n">image</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但需要注意的是，这两个是缺一不可的。</p>
+
+<h3>设置返回字体颜色</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setTintColor:</span><span class="n">color</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>自定义标题</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setTitleTextAttributes:</span><span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">UIColor</span> <span class="nl">colorWithRed:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">green:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">blue:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">alpha:</span><span class="mf">1.0</span><span class="p">],</span>
+</span><span class='line'>  <span class="n">NSForegroundColorAttributeName</span><span class="p">,[</span><span class="n">UIFont</span> <span class="nl">fontWithName:</span><span class="s">@&quot;HelveticaNeue-Light&quot;</span> <span class="nl">size:</span><span class="mf">22.0</span><span class="p">],</span>
+</span><span class='line'>  <span class="n">NSFontAttributeName</span><span class="p">,</span> <span class="nb">nil</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>添加按钮</h3>
+
+<p>在viewController的viewDidLoad中加，注：下面代码是加单个右按钮，多个则使用rightBarButtonItems，而左按钮则是leftBarButtonItem和leftBarButtonItems。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">doneItem</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBarButtonSystemItem:</span><span class="n">UIBarButtonSystemItemDone</span> <span class="nl">target:</span><span class="n">self</span> <span class="nl">action:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="n">doneItem</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
