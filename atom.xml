@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://ZacksTsang.github.io/atom.xml" rel="self"/>
   <link href="http://ZacksTsang.github.io/"/>
-  <updated>2013-11-15T18:08:50+08:00</updated>
+  <updated>2013-11-16T17:14:05+08:00</updated>
   <id>http://ZacksTsang.github.io/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac系统下git与github的一些简单使用]]></title>
+    <link href="http://ZacksTsang.github.io/blog/2013/11/16/macxi-tong-xia-gityu-githubde-%5B%3F%5D-xie-jian-dan-shi-yong/"/>
+    <updated>2013-11-16T10:03:00+08:00</updated>
+    <id>http://ZacksTsang.github.io/blog/2013/11/16/macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong</id>
+    <content type="html"><![CDATA[<p>Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git --version</span></code></pre></td></tr></table></div></figure>
+
+
+<p>回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 <a href="http://git-scm.com/downloads">http://git-scm.com/downloads</a> 下载安装</p>
+
+<h2>创建密钥</h2>
+
+<p>首先，查看机器上是否存在密钥</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$cd ~/.ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果提示：No such file or directory 说明你是第一次使用git，否则需要移除已存在的key，（注：一般先备份，再移除，可以使用下面的命令）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$mkdir backup
+</span><span class='line'>$cp id_rsa* backup
+</span><span class='line'>$rm id_rsa*</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新生成新的密钥：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh-keygen -t rsa -C "you github email"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里会提示输入密码，可以设置一个密码，防止被人往项目里添加代码和内容。生成完后</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ls</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看到有这三个文件：id_rsa     id_rsa.pub  known_hosts</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi id_rsa.pub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将里面的内容copy，粘贴到GitHub自己账号上的SSH Keys上（注：在GitHub账号管理上会有SSH Keys选项卡，添加一个key，把复制内容拷贝上去就可以了）
+测试是否连接成功：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh -v git@github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>出现：Hi you name! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access. 即连接成功，可以进行项目的创建与提交了。</p>
+
+<h2>Git常用的一些基本命令</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git init  //初始化仓库
+</span><span class='line'>
+</span><span class='line'>$git remote add origin "github地址" //建立连接
+</span><span class='line'>
+</span><span class='line'>$git add -u 
+</span><span class='line'>$git commit -m "注解"   //本地提交更改
+</span><span class='line'>
+</span><span class='line'>$git push -u origin master  //提交更改代码
+</span><span class='line'>
+</span><span class='line'>$git pull -u origin  master   //获取最新代码
+</span><span class='line'>
+</span><span class='line'>$git reset -u  //撤销更改</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[菜鸟学习UINavigation]]></title>
