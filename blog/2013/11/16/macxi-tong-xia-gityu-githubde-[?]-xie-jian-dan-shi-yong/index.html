@@ -147,30 +147,42 @@ $git --version 回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以�
 
 <h2>Git常用的一些基本命令</h2>
 
+<p>在项目的根目录下，初始化本地仓库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>建立远程连接，和GitHub上的项目建立连接</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git remote add origin "github的项目地址"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本地更改文件后，需要提交更改时，（注：下面的命令指示提交到本地的仓库）</p>
+
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$git init  //初始化仓库
-</span><span class='line'>
-</span><span class='line'>$git remote add origin "github地址" //建立连接
-</span><span class='line'>
-</span><span class='line'>$git add -u 
-</span><span class='line'>$git commit -m "注解"   //本地提交更改
-</span><span class='line'>
-</span><span class='line'>$git push -u origin master  //提交更改代码
-</span><span class='line'>
-</span><span class='line'>$git pull -u origin  master   //获取最新代码
-</span><span class='line'>
-</span><span class='line'>$git reset -u  //撤销更改</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git add -u 
+</span><span class='line'>$git commit -m "注解"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>提交更改代码到远程分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git push origin 远程分支名称</span></code></pre></td></tr></table></div></figure>
+
+
+<p>获取远程分支最新代码</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git pull origin  远程分支名称</span></code></pre></td></tr></table></div></figure>
+
+
+<p>撤销更改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git reset -u</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
