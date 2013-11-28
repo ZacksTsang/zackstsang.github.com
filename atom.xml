@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://ZacksTsang.github.io/atom.xml" rel="self"/>
   <link href="http://ZacksTsang.github.io/"/>
-  <updated>2013-11-16T18:19:58+08:00</updated>
+  <updated>2013-11-28T16:51:40+08:00</updated>
   <id>http://ZacksTsang.github.io/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[代码实现AutoLayout]]></title>
+    <link href="http://ZacksTsang.github.io/blog/2013/11/28/dai-ma-shi-xian-autolayout/"/>
+    <updated>2013-11-28T15:10:00+08:00</updated>
+    <id>http://ZacksTsang.github.io/blog/2013/11/28/dai-ma-shi-xian-autolayout</id>
+    <content type="html"><![CDATA[<p>纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。</p>
+
+<h2>NSLayoutConstraint</h2>
+
+<p>在使用NSLayoutConstraint之前，需要了解它几个基本属性：</p>
+
+<blockquote><p>NSLayoutAttributeBaseline        基线<br/> NSLayoutAttributeBottom          底部<br/> NSLayoutAttributeCenterX         X轴中点<br/> NSLayoutAttributeCenterY         Y轴中点<br/> NSLayoutAttributeLeading         头<br/> NSLayoutAttributeLeft            左<br/> NSLayoutAttributeRight           右<br/> NSLayoutAttributeTop             顶部<br/> NSLayoutAttributeTrailing        尾<br/> NSLayoutAttributeWidth           宽<br/> NSLayoutAttributeHeight          高<br/> NSLayoutAttributeNotAnAttribute  0 没属性</p></blockquote>
+
+
+<p>约束条件：</p>
+
+<blockquote><p>NSLayoutRelationLessThanOrEqual       -1  小于或等于<br/> NSLayoutRelationEqual                 0   等于<br/> NSLayoutRelationGreaterThanOrEqual    1   大于或等于</p></blockquote>
+
+
+<p>这几个属性和约束条件是我们代码构建AutoLayout的约束(NSLayoutConstraint)经常需要使用到的，NSLayoutConstraint有一个静态方法去构建约束：</p>
+
+<blockquote><p>Create constraints explicitly.  Constraints are of the form &#8220;view1.attr1 = view2.attr2 * multiplier + constant&#8221; .If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.</p></blockquote>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">constraintWithItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view1</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr1</span> <span class="nf">relatedBy:</span><span class="p">(</span><span class="n">NSLayoutRelation</span><span class="p">)</span><span class="nv">relation</span> <span class="nf">toItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view2</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr2</span> <span class="nf">multiplier:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">multiplier</span> <span class="nf">constant:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">c</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>约束条件的添加需要遵循以下几个方面</p>
+
+<blockquote><p>1、自身的约束添加到自身View上<br/>2、对于两个同层级view之间的约束关系，添加到他们的父view上<br/>3、对于两个不同层级view之间的约束关系，添加到他们最近的共同父view上<br/>4、对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上</p></blockquote>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac系统下git与github的一些简单使用]]></title>
