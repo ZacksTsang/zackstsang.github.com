@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://ZacksTsang.github.io/atom.xml" rel="self"/>
   <link href="http://ZacksTsang.github.io/"/>
-  <updated>2013-11-28T16:51:40+08:00</updated>
+  <updated>2013-12-05T17:22:29+08:00</updated>
   <id>http://ZacksTsang.github.io/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -47,6 +47,11 @@
 <p>约束条件的添加需要遵循以下几个方面</p>
 
 <blockquote><p>1、自身的约束添加到自身View上<br/>2、对于两个同层级view之间的约束关系，添加到他们的父view上<br/>3、对于两个不同层级view之间的约束关系，添加到他们最近的共同父view上<br/>4、对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上</p></blockquote>
+
+
+
+
+<blockquote><p>Demo</p><footer><strong>CodeForAutoLayout</strong> <cite><a href='https://zackstsang.github.ios/files/CodeForAutoLayout.zip'>zackstsang.github.ios/files/&hellip;</a></cite></footer></blockquote>
 
 
 
