@@ -9,7 +9,10 @@
   <meta name="author" content="Zacks Tsang">
 
   
-  <meta name="description" content="纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难， &hellip;">
+  <meta name="description" content="git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法 1.建立本地login分支 1
+git checkout -b login 2.切换回本地master分支 1
+git checkout master 3.合并分支login 1
+git merge &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +68,128 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/21/gitfen-zhi-de-xue-xi/">Git分支的学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-21T16:59:00+08:00" pubdate data-updated="true">Dec 21<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/20131221/git.png"></p>
+
+<p>git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法</p>
+
+<p>1.建立本地login分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.切换回本地master分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.合并分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">merge</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.删除分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5.可视化合并工具</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">mergetool</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>6.提交login分支到远程服务器上</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">push</span> <span class="p">[</span><span class="err">远程名</span><span class="p">]</span>  <span class="p">[</span><span class="err">分支名</span><span class="p">]</span>  <span class="c1">//(origin  login)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>7.删除远程login分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">push</span> <span class="p">[</span><span class="err">远程名</span><span class="p">]</span> <span class="o">:</span><span class="p">[</span><span class="err">分支名</span><span class="p">]</span>    <span class="c1">//(origin :login)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>8.将远程分支login获取下来命名为sf</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">sf</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>9.获取远程分支login简化命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span><span class="n">track</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>10.获取远程最新数据</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>11.将远程login分支合并到当前的分支中</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">merge</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>12.获取远程的分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">login</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -404,6 +529,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/21/gitfen-zhi-de-xue-xi/">Git分支的学习</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/28/dai-ma-shi-xian-autolayout/">代码实现AutoLayout</a>
