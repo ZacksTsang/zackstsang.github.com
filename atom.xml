@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://blog.zacksdev.com/atom.xml" rel="self"/>
   <link href="http://blog.zacksdev.com/"/>
-  <updated>2014-04-24T11:20:53+08:00</updated>
+  <updated>2014-11-03T18:08:53+08:00</updated>
   <id>http://blog.zacksdev.com/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[window.open不能打开新标签问题]]></title>
+    <link href="http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/"/>
+    <updated>2014-11-03T18:01:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti</id>
+    <content type="html"><![CDATA[<h1><code>window.open</code> 不能打开一个新标签问题</h1>
+
+<h2>什么情形下是不可以的呢？</h2>
+
+<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
+
+<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="kd">var</span> <span class="nx">win</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span> <span class="c1">//预先打开一个新的标签页</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">win</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="c1">//需要打开的超链接</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>  <span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何知道自定义字体的名称]]></title>

@@ -9,26 +9,7 @@
   <meta name="author" content="Zacks Tsang">
 
   
-  <meta name="description" content="在IOS开发中难免会使用到自定义的字体，但所添加的字体资源名称不是程序中所需要的fontName，那如何快速知道自已所添加自定义字体的fontName呢？ 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20 NSArray *familyNames &hellip;">
+  <meta name="description" content="window.open 不能打开一个新标签问题 什么情形下是不可以的呢？ 我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -96,6 +77,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">window.open不能打开新标签问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-03T18:01:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2014</time>
+        
+           | <a href="/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/#disqus_thread"
+             data-disqus-identifier="http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1><code>window.open</code> 不能打开一个新标签问题</h1>
+
+<h2>什么情形下是不可以的呢？</h2>
+
+<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
+
+<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="kd">var</span> <span class="nx">win</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span> <span class="c1">//预先打开一个新的标签页</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">win</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="c1">//需要打开的超链接</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>  <span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -655,6 +700,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">window.open不能打开新标签问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/07/ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng/">如何知道自定义字体的名称</a>
       </li>
     
@@ -668,10 +717,6 @@
     
       <li class="post">
         <a href="/blog/2013/11/16/macxi-tong-xia-gityu-githubde-%5B%3F%5D-xie-jian-dan-shi-yong/">Mac系统下git与github的一些简单使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/15/cai-niao-xue-xi-uinavigation/">菜鸟学习UINavigation</a>
       </li>
     
   </ul>
