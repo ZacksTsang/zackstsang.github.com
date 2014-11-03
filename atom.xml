@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://blog.zacksdev.com/atom.xml" rel="self"/>
   <link href="http://blog.zacksdev.com/"/>
-  <updated>2014-11-03T18:08:53+08:00</updated>
+  <updated>2014-11-03T18:10:06+08:00</updated>
   <id>http://blog.zacksdev.com/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -18,9 +18,7 @@
     <link href="http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/"/>
     <updated>2014-11-03T18:01:00+08:00</updated>
     <id>http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti</id>
-    <content type="html"><![CDATA[<h1><code>window.open</code> 不能打开一个新标签问题</h1>
-
-<h2>什么情形下是不可以的呢？</h2>
+    <content type="html"><![CDATA[<h2>什么情形下是不可以的呢？</h2>
 
 <p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
 
