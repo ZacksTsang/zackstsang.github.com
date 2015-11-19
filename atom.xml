@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://blog.zacksdev.com/atom.xml" rel="self"/>
   <link href="http://blog.zacksdev.com/"/>
-  <updated>2014-11-03T18:10:06+08:00</updated>
+  <updated>2015-11-19T09:56:54+08:00</updated>
   <id>http://blog.zacksdev.com/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[iOS]那些年，遇到的坑]]></title>
+    <link href="http://blog.zacksdev.com/blog/2015/11/19/ios-na-xie-nian-%2Cyu-dao-de-keng/"/>
+    <updated>2015-11-19T09:52:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng</id>
+    <content type="html"><![CDATA[<p>我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了<em>工程</em>的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。</p>
+
+<h2>性能问题</h2>
+
+<ul>
+<li><p>获取是否允许系统定位</p>
+
+<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p>
+
+<p>  &#8220;`
+  // objc
+  if([CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){</p>
+
+<p>  }
+  &#8220;`
+  这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
+
+<p>  <code>
+  BOOL isLocationOn = [CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;
+ </code></p></li>
+</ul>
+
+
+<h2>多语言问题</h2>
+
+<ul>
+<li><p>货币的处理</p>
+
+<p>  当我们要格式化一些数据时，必然会使用到 <code>NSNumberFormatter</code> ，例如我们想格式化数字为123,12.00 这样的格式时，就会使用以下的代码：</p>
+
+<p>  &#8220;`
+  NSNumberFormatter *format = [NSNumberFormatter new];
+  [format setPositiveFormat:@&ldquo;#,###.##&rdquo;];</p>
+
+<p>  NSString *result = [format stringFromNumber:[NSNumber numberWithDouble:2015.01]];</p>
+
+<p>  <code>``
+  理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置</code>format` 语言属性。</p>
+
+<p>  &#8220;`
+  NSNumberFormatter *format = [NSNumberFormatter new];
+  [format setPositiveFormat:@&ldquo;#,###.##&rdquo;];
+  [format setLocal:[[NSLocal alloc] initWithLocaleIdentifier:@&ldquo;zh&rdquo;]];</p>
+
+<p>  NSString *result = [format stringFromNumber:[NSNumber numberWithDouble:2015.01]];
+  &#8220;`</p></li>
+<li><p>时间处理</p>
+
+<p>  时间的格式化也会有类似货币那种情况，在 <code>NSDateFormatter</code> 时设置我们需要的语言区域。</p>
+
+<p>  <code>
+  NSDateFormatter *format = [NSDateFormatter new];
+  [format setLocale:[NSLocale localeWithLocaleIdentifier:@"en"]];
+ </code></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[window.open不能打开新标签问题]]></title>
