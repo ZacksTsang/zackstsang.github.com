@@ -4,7 +4,7 @@
   <title><![CDATA[Zacks Tsang Blog]]></title>
   <link href="http://blog.zacksdev.com/atom.xml" rel="self"/>
   <link href="http://blog.zacksdev.com/"/>
-  <updated>2015-11-19T10:22:35+08:00</updated>
+  <updated>2015-11-19T10:23:31+08:00</updated>
   <id>http://blog.zacksdev.com/</id>
   <author>
     <name><![CDATA[Zacks Tsang]]></name>
@@ -42,8 +42,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<pre><code>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。
-</code></pre>
+<p>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -74,8 +73,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<pre><code>理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置 `format` 语言属性。
-</code></pre>
+<p>理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置 <code>format</code> 语言属性。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
