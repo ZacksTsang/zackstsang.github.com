@@ -113,20 +113,31 @@
 <ul>
 <li><p>获取是否允许系统定位</p>
 
-<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p>
-
-<p>  &#8220;`
-  // objc
-  if([CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){</p>
-
-<p>  }
-  &#8220;`
-  这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
-
-<p>  <code>
-  BOOL isLocationOn = [CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;
- </code></p></li>
+<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p></li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="c1">// objc</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">([</span><span class="n">CLLocationManager</span> <span class="n">locationServicesEnabled</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">authorizationStatus</span><span class="p">]</span> <span class="o">!=</span> <span class="n">kCLAuthorizationStatusDenied</span><span class="p">){</span>
+</span><span class='line'>      
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="kt">BOOL</span> <span class="n">isLocationOn</span> <span class="o">=</span> <span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">locationServicesEnabled</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">authorizationStatus</span><span class="p">]</span> <span class="o">!=</span> <span class="n">kCLAuthorizationStatusDenied</span><span class="p">;</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>多语言问题</h2>
@@ -134,33 +145,55 @@
 <ul>
 <li><p>货币的处理</p>
 
-<p>  当我们要格式化一些数据时，必然会使用到 <code>NSNumberFormatter</code> ，例如我们想格式化数字为123,12.00 这样的格式时，就会使用以下的代码：</p>
+<p>  当我们要格式化一些数据时，必然会使用到 <code>NSNumberFormatter</code> ，例如我们想格式化数字为123,12.00 这样的格式时，就会使用以下的代码：</p></li>
+</ul>
 
-<p>  &#8220;`
-  NSNumberFormatter *format = [NSNumberFormatter new];
-  [format setPositiveFormat:@&ldquo;#,###.##&rdquo;];</p>
 
-<p>  NSString *result = [format stringFromNumber:[NSNumber numberWithDouble:2015.01]];</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">NSNumberFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumberFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;#,###.##&quot;</span><span class="p">];</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">format</span> <span class="nl">stringFromNumber:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithDouble:</span><span class="mf">2015.01</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  <code>``
-  理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置</code>format` 语言属性。</p>
 
-<p>  &#8220;`
-  NSNumberFormatter *format = [NSNumberFormatter new];
-  [format setPositiveFormat:@&ldquo;#,###.##&rdquo;];
-  [format setLocal:[[NSLocal alloc] initWithLocaleIdentifier:@&ldquo;zh&rdquo;]];</p>
+<pre><code>理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置 `format` 语言属性。
+</code></pre>
 
-<p>  NSString *result = [format stringFromNumber:[NSNumber numberWithDouble:2015.01]];
-  &#8220;`</p></li>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">NSNumberFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumberFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;#,###.##&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setLocal:</span><span class="p">[[</span><span class="n">NSLocal</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithLocaleIdentifier:</span><span class="s">@&quot;zh&quot;</span><span class="p">]];</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">format</span> <span class="nl">stringFromNumber:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithDouble:</span><span class="mf">2015.01</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
 <li><p>时间处理</p>
 
-<p>  时间的格式化也会有类似货币那种情况，在 <code>NSDateFormatter</code> 时设置我们需要的语言区域。</p>
-
-<p>  <code>
-  NSDateFormatter *format = [NSDateFormatter new];
-  [format setLocale:[NSLocale localeWithLocaleIdentifier:@"en"]];
- </code></p></li>
+<p>  时间的格式化也会有类似货币那种情况，在 <code>NSDateFormatter</code> 时设置我们需要的语言区域。</p></li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDateFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">format</span> <span class="nl">setLocale:</span><span class="p">[</span><span class="n">NSLocale</span> <span class="nl">localeWithLocaleIdentifier:</span><span class="s">@&quot;en&quot;</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
