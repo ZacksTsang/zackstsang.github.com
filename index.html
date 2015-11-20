@@ -191,11 +191,16 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
+<span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDateFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>   <span class="c1">// 设置成自己需要固定的语言区</span>
 </span><span class='line'>    <span class="p">[</span><span class="n">format</span> <span class="nl">setLocale:</span><span class="p">[</span><span class="n">NSLocale</span> <span class="nl">localeWithLocaleIdentifier:</span><span class="s">@&quot;en&quot;</span><span class="p">]];</span>
 </span><span class='line'>  
 </span></code></pre></td></tr></table></div></figure>
 
+
+<pre><code>例如我们需要得到月份，中文：`7`、英文：`July`, 那格式化字符串对应为：`MM`、`MMMM`，理想的情况下自然可以得到正确的结果（前提是在英文的系统下），但系统式中文时，就得不到那样的结果，针对这种情况，就需要设置 `format` 的地区，固定其语言区域，避免出现意想不到的结果。 
+</code></pre>
 </div>
   
   
