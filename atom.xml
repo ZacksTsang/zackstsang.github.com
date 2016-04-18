@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Zacks Tsang Blog]]></title>
+  <link href="http://blog.zacksdev.com/atom.xml" rel="self"/>
+  <link href="http://blog.zacksdev.com/"/>
+  <updated>2015-11-27T09:59:04+08:00</updated>
+  <id>http://blog.zacksdev.com/</id>
+  <author>
+    <name><![CDATA[Zacks Tsang]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[iOS]那些年，遇到的坑]]></title>
+    <link href="http://blog.zacksdev.com/blog/2015/11/19/ios-na-xie-nian-%2Cyu-dao-de-keng/"/>
+    <updated>2015-11-19T09:52:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng</id>
+    <content type="html"><![CDATA[<p>我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了<em>工程</em>的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。</p>
+
+<h2>性能问题</h2>
+
+<ul>
+<li><p>获取是否允许系统定位</p>
+
+<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="c1">// objc</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">([</span><span class="n">CLLocationManager</span> <span class="n">locationServicesEnabled</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">authorizationStatus</span><span class="p">]</span> <span class="o">!=</span> <span class="n">kCLAuthorizationStatusDenied</span><span class="p">){</span>
+</span><span class='line'>      <span class="c1">// code here</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="kt">BOOL</span> <span class="n">isLocationOn</span> <span class="o">=</span> <span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">locationServicesEnabled</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="p">[</span><span class="n">CLLocationManager</span> <span class="n">authorizationStatus</span><span class="p">]</span> <span class="o">!=</span> <span class="n">kCLAuthorizationStatusDenied</span><span class="p">;</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>多语言问题</h2>
+
+<ul>
+<li><p>货币的处理</p>
+
+<p>  当我们要格式化一些数据时，必然会使用到 <code>NSNumberFormatter</code> ，例如我们想格式化数字为123,12.00 这样的格式时，就会使用以下的代码：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">NSNumberFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumberFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;#,###.##&quot;</span><span class="p">];</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">format</span> <span class="nl">stringFromNumber:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithDouble:</span><span class="mf">2015.01</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置 <code>format</code> 语言属性。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">NSNumberFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumberFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setPositiveFormat:</span><span class="s">@&quot;#,###.##&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">format</span> <span class="nl">setLocal:</span><span class="p">[[</span><span class="n">NSLocal</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithLocaleIdentifier:</span><span class="s">@&quot;zh&quot;</span><span class="p">]];</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">format</span> <span class="nl">stringFromNumber:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithDouble:</span><span class="mf">2015.01</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>时间处理</p>
+
+<p>  时间的格式化也会有类似货币那种情况，在 <code>NSDateFormatter</code> 时设置我们需要的语言区域。</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="n">NSDateFormatter</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDateFormatter</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>   <span class="c1">// 设置成自己需要固定的语言区</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">format</span> <span class="nl">setLocale:</span><span class="p">[</span><span class="n">NSLocale</span> <span class="nl">localeWithLocaleIdentifier:</span><span class="s">@&quot;en&quot;</span><span class="p">]];</span>
+</span><span class='line'>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例如我们需要得到月份，中文：<code>7</code>、英文：<code>July</code>, 那格式化字符串对应为：<code>MM</code>、<code>MMMM</code>，理想的情况下自然可以得到正确的结果（前提是在英文的系统下），但系统式中文时，就得不到那样的结果，针对这种情况，就需要设置 <code>format</code> 的地区，固定其语言区域，避免出现意想不到的结果。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[window.open不能打开新标签问题]]></title>
+    <link href="http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/"/>
+    <updated>2014-11-03T18:01:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti</id>
+    <content type="html"><![CDATA[<h2>什么情形下是不可以的呢？</h2>
+
+<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
+
+<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="kd">var</span> <span class="nx">win</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span> <span class="c1">//预先打开一个新的标签页</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">win</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="c1">//需要打开的超链接</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">config</span><span class="p">){</span>
+</span><span class='line'>  <span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何知道自定义字体的名称]]></title>
+    <link href="http://blog.zacksdev.com/blog/2014/02/07/ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng/"/>
+    <updated>2014-02-07T15:59:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2014/02/07/ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng</id>
+    <content type="html"><![CDATA[<p>在IOS开发中难免会使用到自定义的字体，但所添加的字体资源名称不是程序中所需要的fontName，那如何快速知道自已所添加自定义字体的fontName呢？</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">NSArray</span> <span class="o">*</span><span class="n">familyNames</span> <span class="o">=</span><span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithArray:</span><span class="p">[</span><span class="n">UIFont</span> <span class="n">familyNames</span><span class="p">]];</span>
+</span><span class='line'>    <span class="n">NSArray</span> <span class="o">*</span><span class="n">fontNames</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">NSInteger</span> <span class="n">indexFamily</span><span class="p">,</span> <span class="n">indexFont</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="n">indexFamily</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">indexFamily</span><span class="o">&lt;</span><span class="p">[</span><span class="n">familyNames</span> <span class="n">count</span><span class="p">];</span><span class="o">++</span><span class="n">indexFamily</span><span class="p">){</span>
+</span><span class='line'>        <span class="n">fontNames</span> <span class="o">=</span><span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithArray:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">fontNamesForFamilyName:</span><span class="p">[</span><span class="n">familyNames</span> <span class="nl">objectAtIndex:</span><span class="n">indexFamily</span><span class="p">]]];</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span><span class="p">(</span><span class="n">indexFont</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">indexFont</span><span class="o">&lt;</span><span class="p">[</span><span class="n">fontNames</span> <span class="n">count</span><span class="p">];</span> <span class="o">++</span><span class="n">indexFont</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">NSString</span> <span class="o">*</span><span class="n">fNames</span><span class="o">=</span><span class="s">@&quot;Thonburi-Bold,Thonburi,Thonburi-Light,SnellRoundhand-Black,SnellRoundhand-Bold,SnellRoundhand,AcademyEngravedLetPlain,MarkerFelt-Thin,MarkerFelt-Wide,Avenir-Heavy,Avenir-Oblique,Avenir-Black,Avenir-Book,Avenir-BlackOblique,Avenir-HeavyOblique,Avenir-Light,Avenir-MediumOblique,Avenir-Medium,Avenir-LightOblique,Avenir-Roman,Avenir-BookOblique,GeezaPro-Bold,GeezaPro,GeezaPro-Light,ArialRoundedMTBold,Trebuchet-BoldItalic,TrebuchetMS,TrebuchetMS-Bold,TrebuchetMS-Italic,ArialMT,Arial-BoldItalicMT,Arial-ItalicMT,Arial-BoldMT,Marion-Regular,Marion-Italic,Marion-Bold,Menlo-BoldItalic,Menlo-Regular,Menlo-Bold,Menlo-Italic,MalayalamSangamMN,MalayalamSangamMN-Bold,KannadaSangamMN,KannadaSangamMN-Bold,GurmukhiMN-Bold,GurmukhiMN,BodoniSvtyTwoOSITCTT-BookIt,BodoniSvtyTwoOSITCTT-Bold,BodoniSvtyTwoOSITCTT-Book,BradleyHandITCTT-Bold,Cochin-Bold,Cochin-BoldItalic,Cochin-Italic,Cochin,SinhalaSangamMN,SinhalaSangamMN-Bold,HiraKakuProN-W6,HiraKakuProN-W3,IowanOldStyle-Bold,IowanOldStyle-BoldItalic,IowanOldStyle-Italic,IowanOldStyle-Roman,DamascusBold,Damascus,DamascusMedium,DamascusSemiBold,AlNile-Bold,AlNile,Farah,Papyrus-Condensed,Papyrus,Verdana-BoldItalic,Verdana-Italic,Verdana,Verdana-Bold,ZapfDingbatsITC,DINCondensed-Bold,AvenirNextCondensed-Regular,AvenirNextCondensed-MediumItalic,AvenirNextCondensed-UltraLightItalic,AvenirNextCondensed-UltraLight,AvenirNextCondensed-BoldItalic,AvenirNextCondensed-Italic,AvenirNextCondensed-Medium,AvenirNextCondensed-HeavyItalic,AvenirNextCondensed-Heavy,AvenirNextCondensed-DemiBoldItalic,AvenirNextCondensed-DemiBold,AvenirNextCondensed-Bold,Courier,Courier-Oblique,Courier-BoldOblique,Courier-Bold,HoeflerText-Regular,HoeflerText-BlackItalic,HoeflerText-Italic,HoeflerText-Black,EuphemiaUCAS,EuphemiaUCAS-Bold,EuphemiaUCAS-Italic,Helvetica-Oblique,Helvetica-Light,Helvetica-Bold,Helvetica,Helvetica-BoldOblique,Helvetica-LightOblique,HiraMinProN-W6,HiraMinProN-W3,BodoniOrnamentsITCTT,Superclarendon-Regular,Superclarendon-BoldItalic,Superclarendon-Light,Superclarendon-BlackItalic,Superclarendon-Italic,Superclarendon-LightItalic,Superclarendon-Bold,Superclarendon-Black,DiwanMishafi,Optima-Regular,Optima-Italic,Optima-Bold,Optima-BoldItalic,Optima-ExtraBlack,GujaratiSangamMN-Bold,GujaratiSangamMN,DevanagariSangamMN,DevanagariSangamMN-Bold,AppleColorEmoji,SavoyeLetPlain,Kailasa,Kailasa-Bold,TimesNewRomanPS-BoldItalicMT,TimesNewRomanPSMT,TimesNewRomanPS-BoldMT,TimesNewRomanPS-ItalicMT,TeluguSangamMN,TeluguSangamMN-Bold,STHeitiSC-Medium,STHeitiSC-Light,AppleSDGothicNeo-Thin,AppleSDGothicNeo-SemiBold,AppleSDGothicNeo-Medium,AppleSDGothicNeo-Regular,AppleSDGothicNeo-Bold,AppleSDGothicNeo-Light,Futura-Medium,Futura-CondensedMedium,Futura-MediumItalic,Futura-CondensedExtraBold,BodoniSvtyTwoITCTT-Book,BodoniSvtyTwoITCTT-Bold,BodoniSvtyTwoITCTT-BookIta,Baskerville-Bold,Baskerville-SemiBoldItalic,Baskerville-BoldItalic,Baskerville,Baskerville-SemiBold,Baskerville-Italic,Symbol,STHeitiTC-Medium,STHeitiTC-Light,Copperplate,Copperplate-Light,Copperplate-Bold,PartyLetPlain,AmericanTypewriter-Light,AmericanTypewriter-CondensedLight,AmericanTypewriter-CondensedBold,AmericanTypewriter,AmericanTypewriter-Condensed,AmericanTypewriter-Bold,ChalkboardSE-Light,ChalkboardSE-Regular,ChalkboardSE-Bold,AvenirNext-MediumItalic,AvenirNext-Bold,AvenirNext-UltraLight,AvenirNext-DemiBold,AvenirNext-HeavyItalic,AvenirNext-Heavy,AvenirNext-Medium,AvenirNext-Italic,AvenirNext-UltraLightItalic,AvenirNext-BoldItalic,AvenirNext-Regular,AvenirNext-DemiBoldItalic,BanglaSangamMN,BanglaSangamMN-Bold,Noteworthy-Bold,Noteworthy-Light,Zapfino,TamilSangamMN,TamilSangamMN-Bold,Chalkduster,ArialHebrew-Bold,ArialHebrew-Light,ArialHebrew,Georgia-BoldItalic,Georgia-Bold,Georgia-Italic,Georgia,HelveticaNeue-BoldItalic,HelveticaNeue-Light,HelveticaNeue-UltraLightItalic,HelveticaNeue-CondensedBold,HelveticaNeue-MediumItalic,HelveticaNeue-Thin,HelveticaNeue-Medium,HelveticaNeue-ThinItalic,HelveticaNeue-LightItalic,HelveticaNeue-UltraLight,HelveticaNeue-Bold,HelveticaNeue,HelveticaNeue-CondensedBlack,GillSans,GillSans-Italic,GillSans-BoldItalic,GillSans-Light,GillSans-LightItalic,GillSans-Bold,Palatino-Roman,Palatino-Italic,Palatino-Bold,Palatino-BoldItalic,CourierNewPSMT,CourierNewPS-BoldMT,CourierNewPS-ItalicMT,CourierNewPS-BoldItalicMT,OriyaSangamMN,OriyaSangamMN-Bold,Didot-Bold,Didot-Italic,Didot,DINAlternate-Bold,BodoniSvtyTwoSCITCTT-Book&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">if</span> <span class="p">([</span><span class="n">fNames</span> <span class="nl">rangeOfString:</span><span class="p">[</span><span class="n">fontNames</span> <span class="nl">objectAtIndex:</span><span class="n">indexFont</span><span class="p">]].</span><span class="n">location</span><span class="o">==</span><span class="n">NSNotFound</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Font name: %@&quot;</span><span class="p">,[</span><span class="n">fontNames</span> <span class="nl">objectAtIndex:</span><span class="n">indexFont</span><span class="p">]);</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个方法可以过滤掉系统自带的字体，只打印所添加的自定义字体名称</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git分支的学习]]></title>
+    <link href="http://blog.zacksdev.com/blog/2013/12/21/gitfen-zhi-de-xue-xi/"/>
+    <updated>2013-12-21T16:59:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2013/12/21/gitfen-zhi-de-xue-xi</id>
+    <content type="html"><![CDATA[<p><img src="http://blog.zacksdev.com/images/20131221/git.png"></p>
+
+<p>git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法</p>
+
+<p>1.建立本地login分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.切换回本地master分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.合并分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">merge</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.删除分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">d</span> <span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5.可视化合并工具</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">mergetool</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>6.提交login分支到远程服务器上</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">push</span> <span class="p">[</span><span class="err">远程名</span><span class="p">]</span>  <span class="p">[</span><span class="err">分支名</span><span class="p">]</span>  <span class="c1">//(origin  login)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>7.删除远程login分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">push</span> <span class="p">[</span><span class="err">远程名</span><span class="p">]</span> <span class="o">:</span><span class="p">[</span><span class="err">分支名</span><span class="p">]</span>    <span class="c1">//(origin :login)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>8.将远程分支login获取下来命名为sf</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">sf</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>9.获取远程分支login简化命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">--</span><span class="n">track</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>10.获取远程最新数据</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">fetch</span> <span class="n">origin</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>11.将远程login分支合并到当前的分支中</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">merge</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>12.获取远程的分支login</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">login</span> <span class="n">origin</span><span class="o">/</span><span class="n">login</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[代码实现AutoLayout]]></title>
+    <link href="http://blog.zacksdev.com/blog/2013/11/28/dai-ma-shi-xian-autolayout/"/>
+    <updated>2013-11-28T15:10:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2013/11/28/dai-ma-shi-xian-autolayout</id>
+    <content type="html"><![CDATA[<p>纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。</p>
+
+<h2>NSLayoutConstraint</h2>
+
+<p>在使用NSLayoutConstraint之前，需要了解它几个基本属性：</p>
+
+<blockquote><p>NSLayoutAttributeBaseline        基线<br/> NSLayoutAttributeBottom          底部<br/> NSLayoutAttributeCenterX         X轴中点<br/> NSLayoutAttributeCenterY         Y轴中点<br/> NSLayoutAttributeLeading         头<br/> NSLayoutAttributeLeft            左<br/> NSLayoutAttributeRight           右<br/> NSLayoutAttributeTop             顶部<br/> NSLayoutAttributeTrailing        尾<br/> NSLayoutAttributeWidth           宽<br/> NSLayoutAttributeHeight          高<br/> NSLayoutAttributeNotAnAttribute  0 没属性</p></blockquote>
+
+
+<p>约束条件：</p>
+
+<blockquote><p>NSLayoutRelationLessThanOrEqual       -1  小于或等于<br/> NSLayoutRelationEqual                 0   等于<br/> NSLayoutRelationGreaterThanOrEqual    1   大于或等于</p></blockquote>
+
+
+<p>这几个属性和约束条件是我们代码构建AutoLayout的约束(NSLayoutConstraint)经常需要使用到的，NSLayoutConstraint有一个静态方法去构建约束：</p>
+
+<blockquote><p>Create constraints explicitly.  Constraints are of the form &#8220;view1.attr1 = view2.attr2 * multiplier + constant&#8221; .If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.</p></blockquote>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">constraintWithItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view1</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr1</span> <span class="nf">relatedBy:</span><span class="p">(</span><span class="n">NSLayoutRelation</span><span class="p">)</span><span class="nv">relation</span> <span class="nf">toItem:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">view2</span> <span class="nf">attribute:</span><span class="p">(</span><span class="n">NSLayoutAttribute</span><span class="p">)</span><span class="nv">attr2</span> <span class="nf">multiplier:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">multiplier</span> <span class="nf">constant:</span><span class="p">(</span><span class="n">CGFloat</span><span class="p">)</span><span class="nv">c</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>约束条件的添加需要遵循以下几个方面</p>
+
+<blockquote><p>1、自身的约束添加到自身View上<br/>2、对于两个同层级view之间的约束关系，添加到他们的父view上<br/>3、对于两个不同层级view之间的约束关系，添加到他们最近的共同父view上<br/>4、对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上</p></blockquote>
+
+
+
+
+<blockquote><p>Single Demo</p><footer><strong>CodeForAutoLayout Demo</strong> <cite><a href='https://github.com/ZacksTsang/zackstsang.github.com/blob/master/images/files/CodeForAutoLayout.zip?raw=true'>github.com/ZacksTsang/blob/&hellip;</a></cite></footer></blockquote>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac系统下git与github的一些简单使用]]></title>
+    <link href="http://blog.zacksdev.com/blog/2013/11/16/macxi-tong-xia-gityu-githubde-%5B%3F%5D-xie-jian-dan-shi-yong/"/>
+    <updated>2013-11-16T10:03:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2013/11/16/macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong</id>
+    <content type="html"><![CDATA[<p>Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git --version</span></code></pre></td></tr></table></div></figure>
+
+
+<p>回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 <a href="http://git-scm.com/downloads">http://git-scm.com/downloads</a> 下载安装</p>
+
+<h2>创建密钥</h2>
+
+<p>首先，查看机器上是否存在密钥</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$cd ~/.ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果提示：No such file or directory 说明你是第一次使用git，否则需要移除已存在的key，（注：一般先备份，再移除，可以使用下面的命令）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$mkdir backup
+</span><span class='line'>$cp id_rsa* backup
+</span><span class='line'>$rm id_rsa*</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新生成新的密钥：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh-keygen -t rsa -C "you github email"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里会提示输入密码，可以设置一个密码，防止被人往项目里添加代码和内容。生成完后</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ls</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以看到有这三个文件：id_rsa     id_rsa.pub  known_hosts</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$vi id_rsa.pub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将里面的内容copy，粘贴到GitHub自己账号上的SSH Keys上（注：在GitHub账号管理上会有SSH Keys选项卡，添加一个key，把复制内容拷贝上去就可以了）
+测试是否连接成功：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ssh -v git@github.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>出现：Hi you name! You&rsquo;ve successfully authenticated, but GitHub does not provide shell access. 即连接成功，可以进行项目的创建与提交了。</p>
+
+<h2>Git常用的一些基本命令</h2>
+
+<p>在项目的根目录下，初始化本地仓库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>建立远程连接，和GitHub上的项目建立连接</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git remote add origin "github的项目地址"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>本地更改文件后，需要提交更改时，（注：下面的命令指示提交到本地的仓库）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git add -u 
+</span><span class='line'>$git commit -m "注解"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>提交更改代码到远程分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git push origin 远程分支名称</span></code></pre></td></tr></table></div></figure>
+
+
+<p>获取远程分支最新代码</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git pull origin  远程分支名称</span></code></pre></td></tr></table></div></figure>
+
+
+<p>撤销更改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$git reset -u</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[菜鸟学习UINavigation]]></title>
+    <link href="http://blog.zacksdev.com/blog/2013/11/15/cai-niao-xue-xi-uinavigation/"/>
+    <updated>2013-11-15T11:53:00+08:00</updated>
+    <id>http://blog.zacksdev.com/blog/2013/11/15/cai-niao-xue-xi-uinavigation</id>
+    <content type="html"><![CDATA[<h2>UINavigation Bar For IOS7</h2>
+
+<p>IOS7中将UINavigation Bar和Status Bar连接在一起，给人呈现一种融为一体的感觉，而不再是独立的一部分。</p>
+
+<p><img class="center" src="http://blog.zacksdev.com/images/20131115/uinavigation_desc.png"></p>
+
+<p>UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们只需要操作这几个属性，还有leftBarButtonItems,rightBarButtonItems，下面是我们使用UINavigation Bar过程中会经常用到的方法：</p>
+
+<h3>设置背景颜色</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="n">color</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果是使用默认的UINavigationController，则在</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">]]];</span><span class="c1">//设置自己的颜色</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而在自定义的UINavigationController中，则</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBarTintColor:</span><span class="p">[</span><span class="n">UIColor</span> <span class="n">redColor</span><span class="p">]]];</span><span class="c1">//设置自己的颜色</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得注意的是：如果在子Controller的viewDidLoad中加入此代码时，则会发生切换回其它viewController时，UINavigation Bar背景会改变为子viewController改变的颜色，而当前的viewConroller则不会改变。</p>
+
+<h3>设置背景图片</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackgroundImage:</span><span class="n">image</span> <span class="nl">forBarMetrics:</span><span class="n">UIBarMetricsDefault</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>设置返回的图片</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackIndicatorImage:</span><span class="n">image</span><span class="p">];</span>
+</span><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setBackIndicatorTransitionMaskImage:</span><span class="n">image</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但需要注意的是，这两个是缺一不可的。</p>
+
+<h3>设置返回字体颜色</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setTintColor:</span><span class="n">color</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>自定义标题</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setTitleTextAttributes:</span><span class="p">[</span><span class="n">NSDictionary</span> <span class="nl">dictionaryWithObjectsAndKeys:</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">UIColor</span> <span class="nl">colorWithRed:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">green:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">blue:</span><span class="mf">245.0</span><span class="o">/</span><span class="mf">255.0</span> <span class="nl">alpha:</span><span class="mf">1.0</span><span class="p">],</span>
+</span><span class='line'>  <span class="n">NSForegroundColorAttributeName</span><span class="p">,[</span><span class="n">UIFont</span> <span class="nl">fontWithName:</span><span class="s">@&quot;HelveticaNeue-Light&quot;</span> <span class="nl">size:</span><span class="mf">22.0</span><span class="p">],</span>
+</span><span class='line'>  <span class="n">NSFontAttributeName</span><span class="p">,</span> <span class="nb">nil</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>添加按钮</h3>
+
+<p>在viewController的viewDidLoad中加，注：下面代码是加单个右按钮，多个则使用rightBarButtonItems，而左按钮则是leftBarButtonItem和leftBarButtonItems。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UIBarButtonItem</span> <span class="o">*</span><span class="n">doneItem</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBarButtonSystemItem:</span><span class="n">UIBarButtonSystemItemDone</span> <span class="nl">target:</span><span class="n">self</span> <span class="nl">action:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'> <span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="n">doneItem</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>
