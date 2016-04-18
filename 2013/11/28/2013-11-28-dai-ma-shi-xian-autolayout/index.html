@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>代码实现AutoLayout | Zacks 的开发随想记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。
+##NSLayoutConstraint##在使用NSLay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码实现AutoLayout">
+<meta property="og:url" content="http://blog.zacksdev.com/2013/11/28/2013-11-28-dai-ma-shi-xian-autolayout/index.html">
+<meta property="og:site_name" content="Zacks 的开发随想记">
+<meta property="og:description" content="纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。
+##NSLayoutConstraint##在使用NSLay">
+<meta property="og:updated_time" content="2013-12-21T08:54:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码实现AutoLayout">
+<meta name="twitter:description" content="纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。
+##NSLayoutConstraint##在使用NSLay">
+  
+    <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xt3qs.com2.z0.glb.clouddn.com/avator.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zacks Tsang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">iOS、Android、全端的碎碎念</p>
+		
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ZacksTsang" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ZacksTsang" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/ceng-shao-jia" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Zacks Tsang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xt3qs.com2.z0.glb.clouddn.com/avator.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Zacks Tsang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">iOS、Android、全端的碎碎念</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ZacksTsang" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ZacksTsang" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/ceng-shao-jia" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2013-11-28-dai-ma-shi-xian-autolayout" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2013/11/28/2013-11-28-dai-ma-shi-xian-autolayout/" class="article-date">
+  	<time datetime="2013-11-28T07:10:00.000Z" itemprop="datePublished">2013-11-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      代码实现AutoLayout
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。</p>
+<p>##NSLayoutConstraint##<br>在使用NSLayoutConstraint之前，需要了解它几个基本属性：<br><blockquote><p>NSLayoutAttributeBaseline        基线<br>NSLayoutAttributeBottom          底部<br>NSLayoutAttributeCenterX         X轴中点<br>NSLayoutAttributeCenterY         Y轴中点<br>NSLayoutAttributeLeading         头<br>NSLayoutAttributeLeft            左<br>NSLayoutAttributeRight           右<br>NSLayoutAttributeTop             顶部<br>NSLayoutAttributeTrailing        尾<br>NSLayoutAttributeWidth           宽<br>NSLayoutAttributeHeight          高<br>NSLayoutAttributeNotAnAttribute  0 没属性</p>
+</blockquote><br>约束条件：<br><blockquote><p>NSLayoutRelationLessThanOrEqual       -1  小于或等于<br>NSLayoutRelationEqual                 0   等于<br>NSLayoutRelationGreaterThanOrEqual    1   大于或等于</p>
+</blockquote><br>这几个属性和约束条件是我们代码构建AutoLayout的约束(NSLayoutConstraint)经常需要使用到的，NSLayoutConstraint有一个静态方法去构建约束：</p>
+<blockquote><p>Create constraints explicitly.  Constraints are of the form “view1.attr1 = view2.attr2 * multiplier + constant” .If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">id</span>)constraintWithItem:(<span class="keyword">id</span>)view1 attribute:(<span class="built_in">NSLayoutAttribute</span>)attr1 relatedBy:(<span class="built_in">NSLayoutRelation</span>)relation toItem:(<span class="keyword">id</span>)view2 attribute:(<span class="built_in">NSLayoutAttribute</span>)attr2 multiplier:(<span class="built_in">CGFloat</span>)multiplier constant:(<span class="built_in">CGFloat</span>)c;</span><br></pre></td></tr></table></figure>
+<p>约束条件的添加需要遵循以下几个方面<br><blockquote><p>1、自身的约束添加到自身View上<br>2、对于两个同层级view之间的约束关系，添加到他们的父view上<br>3、对于两个不同层级view之间的约束关系，添加到他们最近的共同父view上<br>4、对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上</p>
+</blockquote></p>
+<blockquote><p>Single Demo</p>
+<footer><strong>CodeForAutoLayout Demo</strong><cite><a href="https://github.com/ZacksTsang/zackstsang.github.com/blob/master/images/files/CodeForAutoLayout.zip?raw=true" target="_blank" rel="external">github.com/ZacksTsang/zackstsang.github.com/blob/master/images/files/CodeForAutoLayout.zip?raw=true</a></cite></footer></blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/12/21/2013-12-21-gitfen-zhi-de-xue-xi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          git分支的学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/11/16/2013-11-16-macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mac系统下git与github的一些简单使用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zacks Tsang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-50334840-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
