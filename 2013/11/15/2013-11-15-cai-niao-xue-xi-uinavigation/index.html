@@ -18,7 +18,7 @@ UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们�
 
 UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们只需要操作这几个属性，还有leftBarButtonItems,rightBarButtonItems，下面是我们使用UINavigat">
 <meta property="og:image" content="http://blog.zacksdev.com/img/20131115/uinavigation_desc.png">
-<meta property="og:updated_time" content="2016-04-18T06:57:26.000Z">
+<meta property="og:updated_time" content="2016-04-19T02:59:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="菜鸟学习UINavigation">
 <meta name="twitter:description" content="##UINavigation Bar For IOS7##IOS7中将UINavigation Bar和Status Bar连接在一起，给人呈现一种融为一体的感觉，而不再是独立的一部分。
@@ -118,7 +118,7 @@ UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a>
 					</div>
 				</section>
 				
@@ -207,7 +207,15 @@ UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们�
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
+	</div>
+
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -222,8 +230,8 @@ UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们�
 <p>###设置背景图片###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackgroundImage:image forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure></p>
 <p>###设置返回的图片###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackIndicatorImage:image];</span><br><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackIndicatorTransitionMaskImage:image];</span><br></pre></td></tr></table></figure><br>但需要注意的是，这两个是缺一不可的。</p>
 <p>###设置返回字体颜色###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setTintColor:color];</span><br></pre></td></tr></table></figure></p>
-<p>###自定义标题###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setTitleTextAttributes:[<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">	[<span class="built_in">UIColor</span> colorWithRed:<span class="number">245.0</span>/<span class="number">255.0</span> green:<span class="number">245.0</span>/<span class="number">255.0</span> blue:<span class="number">245.0</span>/<span class="number">255.0</span> alpha:<span class="number">1.0</span>], </span><br><span class="line">	<span class="built_in">NSForegroundColorAttributeName</span>,[<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">22.0</span>], </span><br><span class="line">	<span class="built_in">NSFontAttributeName</span>, <span class="literal">nil</span>]];</span><br></pre></td></tr></table></figure></p>
-<p>###添加按钮###<br>在viewController的viewDidLoad中加，注：下面代码是加单个右按钮，多个则使用rightBarButtonItems，而左按钮则是leftBarButtonItem和leftBarButtonItems。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIBarButtonItem</span> *doneItem = [[<span class="built_in">UIBarButtonItem</span> alloc] initWithBarButtonSystemItem:<span class="built_in">UIBarButtonSystemItemDone</span> target:<span class="keyword">self</span> action:<span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">self</span>.navigationItem.rightBarButtonItem = doneItem;</span><br></pre></td></tr></table></figure></p>
+<p>###自定义标题###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setTitleTextAttributes:[<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">	[<span class="built_in">UIColor</span> colorWithRed:<span class="number">245.0</span>/<span class="number">255.0</span> green:<span class="number">245.0</span>/<span class="number">255.0</span> blue:<span class="number">245.0</span>/<span class="number">255.0</span> alpha:<span class="number">1.0</span>],</span><br><span class="line">	<span class="built_in">NSForegroundColorAttributeName</span>,[<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">22.0</span>],</span><br><span class="line">	<span class="built_in">NSFontAttributeName</span>, <span class="literal">nil</span>]];</span><br></pre></td></tr></table></figure></p>
+<p>###添加按钮###<br>在viewController的viewDidLoad中加，注：下面代码是加单个右按钮，多个则使用rightBarButtonItems，而左按钮则是leftBarButtonItem和leftBarButtonItems。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIBarButtonItem</span> *doneItem = [[<span class="built_in">UIBarButtonItem</span> alloc] initWithBarButtonSystemItem:<span class="built_in">UIBarButtonSystemItemDone</span> target:<span class="keyword">self</span> action:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"> <span class="keyword">self</span>.navigationItem.rightBarButtonItem = doneItem;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

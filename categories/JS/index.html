@@ -5,27 +5,17 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>window.open不能打开新标签问题 | Zacks 的开发随想记</title>
+  <title>Category: JS | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
-故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="window.open不能打开新标签问题">
-<meta property="og:url" content="http://blog.zacksdev.com/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/index.html">
+  <meta name="description" content="夙兴夜寐枉徒劳">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zacks 的开发随想记">
+<meta property="og:url" content="http://blog.zacksdev.com/categories/JS/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
-故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
-<meta property="og:updated_time" content="2016-04-19T02:59:37.000Z">
+<meta property="og:description" content="夙兴夜寐枉徒劳">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="window.open不能打开新标签问题">
-<meta name="twitter:description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
-故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
+<meta name="twitter:title" content="Zacks 的开发随想记">
+<meta name="twitter:description" content="夙兴夜寐枉徒劳">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -183,102 +173,57 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" class="article-date">
-  	<time datetime="2014-11-03T10:01:00.000Z" itemprop="datePublished">2014-11-03</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2014" class="archive-year">2014</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" class="archive-article-date">
+  	<time datetime="2014-11-03T10:01:00.000Z" itemprop="datePublished">Nov 3</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      window.open不能打开新标签问题
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">window.open不能打开新标签问题</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 	</div>
 
-        
+          
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/JS/">JS</a>
 	</div>
 
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##什么情形下是不可以的呢？</p>
-<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
-<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> win=<span class="built_in">window</span>.open(<span class="string">""</span>); <span class="comment">//预先打开一个新的标签页</span></span><br><span class="line"></span><br><span class="line">$http.get(<span class="string">''</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    win.location.href=<span class="string">""</span>; <span class="comment">//需要打开的超链接</span></span><br><span class="line"></span><br><span class="line">&#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/19/2015-11-19-ios-na-xie-nian-,yu-dao-de-keng/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          [iOS]那些年，遇到的坑
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/02/07/2014-02-07-ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何知道自定义字体的名称</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-
-
-
-
-
-
-<section id="comments">
-  <div id="disqus_thread"></div>
-    <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</section>
+    
 
 </div>
       <footer id="footer">
@@ -304,10 +249,10 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false
 	}
 </script>

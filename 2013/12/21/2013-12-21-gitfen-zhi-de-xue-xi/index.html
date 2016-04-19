@@ -8,19 +8,19 @@
   <title>git分支的学习 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法
-1.建立本地login分支1git checkout -b login 2.切换回本地master分支1git checkout master 3.合并分支login1git merge login 4.删除分支login1git branch -d login5.可视化合并工具1git mergetoo">
+1.建立本地login分支1git checkout -b login2.切换回本地master分支1git checkout master3.合并分支login1git merge login4.删除分支login1git branch -d login5.可视化合并工具1git mergetool6.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git分支的学习">
 <meta property="og:url" content="http://blog.zacksdev.com/2013/12/21/2013-12-21-gitfen-zhi-de-xue-xi/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
 <meta property="og:description" content="git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法
-1.建立本地login分支1git checkout -b login 2.切换回本地master分支1git checkout master 3.合并分支login1git merge login 4.删除分支login1git branch -d login5.可视化合并工具1git mergetoo">
+1.建立本地login分支1git checkout -b login2.切换回本地master分支1git checkout master3.合并分支login1git merge login4.删除分支login1git branch -d login5.可视化合并工具1git mergetool6.">
 <meta property="og:image" content="http://blog.zacksdev.com/img/20131221/git.png">
-<meta property="og:updated_time" content="2016-04-18T06:58:25.000Z">
+<meta property="og:updated_time" content="2016-04-19T02:59:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git分支的学习">
 <meta name="twitter:description" content="git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法
-1.建立本地login分支1git checkout -b login 2.切换回本地master分支1git checkout master 3.合并分支login1git merge login 4.删除分支login1git branch -d login5.可视化合并工具1git mergetoo">
+1.建立本地login分支1git checkout -b login2.切换回本地master分支1git checkout master3.合并分支login1git merge login4.删除分支login1git branch -d login5.可视化合并工具1git mergetool6.">
 <meta name="twitter:image" content="http://blog.zacksdev.com/img/20131221/git.png">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						
+						<a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a>
 					</div>
 				</section>
 				
@@ -204,7 +204,15 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li></ul>
+	</div>
+
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Git/">Git</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -214,7 +222,7 @@
       
         <img src="/img/20131221/git.png">
 <p>git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法</p>
-<p>1.建立本地login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login </span><br></pre></td></tr></table></figure><br>2.切换回本地master分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master </span><br></pre></td></tr></table></figure><br>3.合并分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge login </span><br></pre></td></tr></table></figure><br>4.删除分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d login</span><br></pre></td></tr></table></figure><br>5.可视化合并工具<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool</span><br></pre></td></tr></table></figure><br>6.提交login分支到远程服务器上<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名]  [分支名]  <span class="comment">//(origin  login)</span></span><br></pre></td></tr></table></figure><br>7.删除远程login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名] :[分支名]    <span class="comment">//(origin :login)</span></span><br></pre></td></tr></table></figure><br>8.将远程分支login获取下来命名为sf<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b sf origin/login</span><br></pre></td></tr></table></figure><br>9.获取远程分支login简化命令：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --track origin/login</span><br></pre></td></tr></table></figure><br>10.获取远程最新数据<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure><br>11.将远程login分支合并到当前的分支中<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/login</span><br></pre></td></tr></table></figure><br>12.获取远程的分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login origin/login</span><br></pre></td></tr></table></figure></p>
+<p>1.建立本地login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login</span><br></pre></td></tr></table></figure><br>2.切换回本地master分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure><br>3.合并分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge login</span><br></pre></td></tr></table></figure><br>4.删除分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d login</span><br></pre></td></tr></table></figure><br>5.可视化合并工具<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool</span><br></pre></td></tr></table></figure><br>6.提交login分支到远程服务器上<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名]  [分支名]  <span class="comment">//(origin  login)</span></span><br></pre></td></tr></table></figure><br>7.删除远程login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名] :[分支名]    <span class="comment">//(origin :login)</span></span><br></pre></td></tr></table></figure><br>8.将远程分支login获取下来命名为sf<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b sf origin/login</span><br></pre></td></tr></table></figure><br>9.获取远程分支login简化命令：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --track origin/login</span><br></pre></td></tr></table></figure><br>10.获取远程最新数据<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure><br>11.将远程login分支合并到当前的分支中<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/login</span><br></pre></td></tr></table></figure><br>12.获取远程的分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login origin/login</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
