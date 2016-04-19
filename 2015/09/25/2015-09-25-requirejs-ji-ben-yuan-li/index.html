@@ -19,7 +19,7 @@
 如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
 <meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/gremlin-jpg-jpg">
 <meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/build-visual-studio-png-png">
-<meta property="og:updated_time" content="2016-04-19T13:40:52.000Z">
+<meta property="og:updated_time" content="2016-04-19T13:42:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【翻译】RequireJS 的基本原理">
 <meta name="twitter:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
@@ -238,7 +238,7 @@
 <blockquote>
 <p>模块化就是将一组有关联性的东西封装或打包起来，它里面包含了对象、方法、变量，或者其它任何东西。创建模块封装展示它统一的管理方式，我们可以将一些小功能打包起来，以方便放在其它大的模块里使用。</p>
 </blockquote>
-<p>根据这个想法：在 <code>.NET</code> 或 <code>Java</code>，你可以使用类 (classes) 创建一个项目，之后你得到一个编译好的模块，这个模块包含你已声明类。现在你需要在其它项目使用这个模块，那它非常容易地使用，只需将它关联或引入项目里即可。这就是模块封装的概念，但这块在<code>JavaScript</code> 世界里是完全缺失的。</p>
+<p>根据这个想法：在 <code>.NET</code> 或 <code>Java</code>，你可以使用类 (classes) 创建一个项目，之后你得到一个编译好的模块，这个模块包含你已声明类。现在你需要在其它项目使用这个模块，那它非常容易地使用，只需将它关联或引入项目里即可。这就是模块封装的概念，但模块在<code>JavaScript</code> 世界里是完全缺失的。</p>
 <p>引起这个问题，大致有一下两点：</p>
 <ol>
 <li><code>JavaScript</code> 一直没有创建模块的语法</li>
@@ -246,8 +246,8 @@
 </ol>
 <a id="more"></a>
 <h2 id="创建模块"><a href="#创建模块" class="headerlink" title="创建模块"></a>创建模块</h2><p>我们来看下这个问题通常是如何产生的。假设我们有个简单的应用需要使用到 color palette widget。功能是在 color palette 移动选择器去改变页面的颜色。</p>
-<p><em>更多有关于Color Picker widgets有趣的例子，我没有全部展现，可以<a href="http://jsbin.com/oliban/4" target="_blank" rel="external">参考这里</a></em></p>
-<p>我们看下在JavaScript中使用的场景。</p>
+<p><em>更多有关于 Color Picker widgets 有趣的例子，我没有全部展现，可以<a href="http://jsbin.com/oliban/4" target="_blank" rel="external">参考这里</a></em></p>
+<p>我们看下在 <code>JavaScript</code> 中使用的场景。</p>
 <p>Color Experiments Code<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// open a document ready function</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// function that just changes the background color</span></span><br><span class="line">  <span class="keyword">var</span> setBackground = <span class="function"><span class="keyword">function</span> (<span class="params">color</span>) </span>&#123;</span><br><span class="line">      $(<span class="built_in">document</span>.body).css(<span class="string">"background-color"</span>, color);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// function to handle the pallete color selection</span></span><br><span class="line">  <span class="keyword">var</span> setColor = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// the color object contains all the hex, rgba, and hsl</span></span><br><span class="line">      <span class="comment">// conversions and utilities</span></span><br><span class="line">      <span class="keyword">var</span> color = e.sender.color().toBytes();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// set the color</span></span><br><span class="line">      setBackground(e.value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// select and create the color pallete</span></span><br><span class="line">  <span class="keyword">var</span> colors = $(<span class="string">"#colors"</span>).kendoFlatColorPicker(&#123;</span><br><span class="line">      change: setColor,</span><br><span class="line">      value: <span class="string">"#fff"</span></span><br><span class="line">  &#125;).getKendoFlatColorPicker();   </span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>当我看到上面的代码，我意识到可以将它抽取成两个不同的对象.</p>
 <ol>
