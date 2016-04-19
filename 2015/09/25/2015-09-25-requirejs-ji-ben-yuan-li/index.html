@@ -5,17 +5,27 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Zacks 的开发随想记</title>
+  <title>【翻译】RequireJS 的基本原理 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="夙兴夜寐枉徒劳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zacks 的开发随想记">
-<meta property="og:url" content="http://blog.zacksdev.com/index.html">
+  <meta name="description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
+
+如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【翻译】RequireJS 的基本原理">
+<meta property="og:url" content="http://blog.zacksdev.com/2015/09/25/2015-09-25-requirejs-ji-ben-yuan-li/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="夙兴夜寐枉徒劳">
+<meta property="og:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
+
+如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/gremlin-jpg-jpg">
+<meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/build-visual-studio-png-png">
+<meta property="og:updated_time" content="2016-04-19T08:09:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zacks 的开发随想记">
-<meta name="twitter:description" content="夙兴夜寐枉徒劳">
+<meta name="twitter:title" content="【翻译】RequireJS 的基本原理">
+<meta name="twitter:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
+
+如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta name="twitter:image" content="http://www.telerik.com/sfimages/default-source/blogs/gremlin-jpg-jpg">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -173,88 +183,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-2015-11-19-ios-na-xie-nian-,yu-dao-de-keng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/19/2015-11-19-ios-na-xie-nian-,yu-dao-de-keng/" class="article-date">
-  	<time datetime="2015-11-19T01:52:00.000Z" itemprop="datePublished">2015-11-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/19/2015-11-19-ios-na-xie-nian-,yu-dao-de-keng/">[iOS]那些年，遇到的坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了<em>工程</em>的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。</p>
-<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><ul>
-<li><p>获取是否允许系统定位</p>
-<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// objc</span></span><br><span class="line"><span class="keyword">if</span>([CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)&#123;</span><br><span class="line">	<span class="comment">// code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> isLocationOn = [CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;</span><br></pre></td></tr></table></figure>
-<h2 id="多语言问题"><a href="#多语言问题" class="headerlink" title="多语言问题"></a>多语言问题</h2></li>
-<li><p>货币的处理</p>
-<p>  当我们要格式化一些数据时，必然会使用到 <code>NSNumberFormatter</code> ，例如我们想格式化数字为123,12.00 这样的格式时，就会使用以下的代码：</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSNumberFormatter</span> *format = [<span class="built_in">NSNumberFormatter</span> new];</span><br><span class="line">[format setPositiveFormat:<span class="string">@"#,###.##"</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *result = [format stringFromNumber:[<span class="built_in">NSNumber</span> numberWithDouble:<span class="number">2015.01</span>]];</span><br></pre></td></tr></table></figure>
-<p>理想的情况下，这样就满足了我们的需要，但事实上我们需要的是 123,12.01 这样的结果，在中文系统的情况下我们是会得到我们想要的结果，但切换了系统语言时，就会看到杯具的事情发生了。那个格式化的结果变了，变成其它语言的习惯，不是我们想要的结果。那需要我们想要的结果时，那就得设置 <code>format</code> 语言属性。</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">NSNumberFormatter</span> *format = [<span class="built_in">NSNumberFormatter</span> new];</span><br><span class="line">[format setPositiveFormat:<span class="string">@"#,###.##"</span>];</span><br><span class="line">[format setLocal:[[<span class="built_in">NSLocal</span> alloc] initWithLocaleIdentifier:<span class="string">@"zh"</span>]];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *result = [format stringFromNumber:[<span class="built_in">NSNumber</span> numberWithDouble:<span class="number">2015.01</span>]];</span><br></pre></td></tr></table></figure></li>
-<li><p>时间处理</p>
-<p>  时间的格式化也会有类似货币那种情况，在 <code>NSDateFormatter</code> 时设置我们需要的语言区域。</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDateFormatter</span> *format = [<span class="built_in">NSDateFormatter</span> new];</span><br><span class="line"><span class="comment">// 设置成自己需要固定的语言区</span></span><br><span class="line">  [format setLocale:[<span class="built_in">NSLocale</span> localeWithLocaleIdentifier:<span class="string">@"en"</span>]];</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-<p>例如我们需要得到月份，中文：<code>7</code>、英文：<code>July</code>, 那格式化字符串对应为：<code>MM</code>、<code>MMMM</code>，理想的情况下自然可以得到正确的结果（前提是在英文的系统下），但系统式中文时，就得不到那样的结果，针对这种情况，就需要设置 <code>format</code> 的地区，固定其语言区域，避免出现意想不到的结果。</p>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-09-25-requirejs-ji-ben-yuan-li" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2015-09-25-requirejs-ji-ben-yuan-li" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/09/25/2015-09-25-requirejs-ji-ben-yuan-li/" class="article-date">
@@ -270,12 +199,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/25/2015-09-25-requirejs-ji-ben-yuan-li/">【翻译】RequireJS 的基本原理</a>
+    <h1 class="article-title" itemprop="name">
+      【翻译】RequireJS 的基本原理
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RequireJS/">RequireJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JS/">JS</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -361,149 +305,28 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RequireJS/">RequireJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JS/">JS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" class="article-date">
-  	<time datetime="2014-11-03T10:01:00.000Z" itemprop="datePublished">2014-11-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+<nav id="article-nav">
+  
+    <a href="/2015/11/19/2015-11-19-ios-na-xie-nian-,yu-dao-de-keng/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">window.open不能打开新标签问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##什么情形下是不可以的呢？</p>
-<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
-<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> win=<span class="built_in">window</span>.open(<span class="string">""</span>); <span class="comment">//预先打开一个新的标签页</span></span><br><span class="line"></span><br><span class="line">$http.get(<span class="string">''</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    win.location.href=<span class="string">""</span>; <span class="comment">//需要打开的超链接</span></span><br><span class="line"></span><br><span class="line">&#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JS/">JS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2014-02-07-ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/02/07/2014-02-07-ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng/" class="article-date">
-  	<time datetime="2014-02-07T07:59:00.000Z" itemprop="datePublished">2014-02-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          [iOS]那些年，遇到的坑
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/02/07/2014-02-07-ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng/">如何知道自定义字体的名称</a>
-    </h1>
   
+    <a href="/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">window.open不能打开新标签问题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在IOS开发中难免会使用到自定义的字体，但所添加的字体资源名称不是程序中所需要的fontName，那如何快速知道自已所添加自定义字体的fontName呢？<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *familyNames =[[<span class="built_in">NSArray</span> alloc]initWithArray:[<span class="built_in">UIFont</span> familyNames]];</span><br><span class="line">   <span class="built_in">NSArray</span> *fontNames;</span><br><span class="line">   <span class="built_in">NSInteger</span> indexFamily, indexFont;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span>(indexFamily=<span class="number">0</span>;indexFamily&lt;[familyNames count];++indexFamily)&#123;</span><br><span class="line">       fontNames =[[<span class="built_in">NSArray</span> alloc]initWithArray:[<span class="built_in">UIFont</span> fontNamesForFamilyName:[familyNames objectAtIndex:indexFamily]]];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span>(indexFont=<span class="number">0</span>; indexFont&lt;[fontNames count]; ++indexFont)&#123;</span><br><span class="line"></span><br><span class="line">           <span class="built_in">NSString</span> *fNames=<span class="string">@"Thonburi-Bold,Thonburi,Thonburi-Light,SnellRoundhand-Black,SnellRoundhand-Bold,SnellRoundhand,AcademyEngravedLetPlain,MarkerFelt-Thin,MarkerFelt-Wide,Avenir-Heavy,Avenir-Oblique,Avenir-Black,Avenir-Book,Avenir-BlackOblique,Avenir-HeavyOblique,Avenir-Light,Avenir-MediumOblique,Avenir-Medium,Avenir-LightOblique,Avenir-Roman,Avenir-BookOblique,GeezaPro-Bold,GeezaPro,GeezaPro-Light,ArialRoundedMTBold,Trebuchet-BoldItalic,TrebuchetMS,TrebuchetMS-Bold,TrebuchetMS-Italic,ArialMT,Arial-BoldItalicMT,Arial-ItalicMT,Arial-BoldMT,Marion-Regular,Marion-Italic,Marion-Bold,Menlo-BoldItalic,Menlo-Regular,Menlo-Bold,Menlo-Italic,MalayalamSangamMN,MalayalamSangamMN-Bold,KannadaSangamMN,KannadaSangamMN-Bold,GurmukhiMN-Bold,GurmukhiMN,BodoniSvtyTwoOSITCTT-BookIt,BodoniSvtyTwoOSITCTT-Bold,BodoniSvtyTwoOSITCTT-Book,BradleyHandITCTT-Bold,Cochin-Bold,Cochin-BoldItalic,Cochin-Italic,Cochin,SinhalaSangamMN,SinhalaSangamMN-Bold,HiraKakuProN-W6,HiraKakuProN-W3,IowanOldStyle-Bold,IowanOldStyle-BoldItalic,IowanOldStyle-Italic,IowanOldStyle-Roman,DamascusBold,Damascus,DamascusMedium,DamascusSemiBold,AlNile-Bold,AlNile,Farah,Papyrus-Condensed,Papyrus,Verdana-BoldItalic,Verdana-Italic,Verdana,Verdana-Bold,ZapfDingbatsITC,DINCondensed-Bold,AvenirNextCondensed-Regular,AvenirNextCondensed-MediumItalic,AvenirNextCondensed-UltraLightItalic,AvenirNextCondensed-UltraLight,AvenirNextCondensed-BoldItalic,AvenirNextCondensed-Italic,AvenirNextCondensed-Medium,AvenirNextCondensed-HeavyItalic,AvenirNextCondensed-Heavy,AvenirNextCondensed-DemiBoldItalic,AvenirNextCondensed-DemiBold,AvenirNextCondensed-Bold,Courier,Courier-Oblique,Courier-BoldOblique,Courier-Bold,HoeflerText-Regular,HoeflerText-BlackItalic,HoeflerText-Italic,HoeflerText-Black,EuphemiaUCAS,EuphemiaUCAS-Bold,EuphemiaUCAS-Italic,Helvetica-Oblique,Helvetica-Light,Helvetica-Bold,Helvetica,Helvetica-BoldOblique,Helvetica-LightOblique,HiraMinProN-W6,HiraMinProN-W3,BodoniOrnamentsITCTT,Superclarendon-Regular,Superclarendon-BoldItalic,Superclarendon-Light,Superclarendon-BlackItalic,Superclarendon-Italic,Superclarendon-LightItalic,Superclarendon-Bold,Superclarendon-Black,DiwanMishafi,Optima-Regular,Optima-Italic,Optima-Bold,Optima-BoldItalic,Optima-ExtraBlack,GujaratiSangamMN-Bold,GujaratiSangamMN,DevanagariSangamMN,DevanagariSangamMN-Bold,AppleColorEmoji,SavoyeLetPlain,Kailasa,Kailasa-Bold,TimesNewRomanPS-BoldItalicMT,TimesNewRomanPSMT,TimesNewRomanPS-BoldMT,TimesNewRomanPS-ItalicMT,TeluguSangamMN,TeluguSangamMN-Bold,STHeitiSC-Medium,STHeitiSC-Light,AppleSDGothicNeo-Thin,AppleSDGothicNeo-SemiBold,AppleSDGothicNeo-Medium,AppleSDGothicNeo-Regular,AppleSDGothicNeo-Bold,AppleSDGothicNeo-Light,Futura-Medium,Futura-CondensedMedium,Futura-MediumItalic,Futura-CondensedExtraBold,BodoniSvtyTwoITCTT-Book,BodoniSvtyTwoITCTT-Bold,BodoniSvtyTwoITCTT-BookIta,Baskerville-Bold,Baskerville-SemiBoldItalic,Baskerville-BoldItalic,Baskerville,Baskerville-SemiBold,Baskerville-Italic,Symbol,STHeitiTC-Medium,STHeitiTC-Light,Copperplate,Copperplate-Light,Copperplate-Bold,PartyLetPlain,AmericanTypewriter-Light,AmericanTypewriter-CondensedLight,AmericanTypewriter-CondensedBold,AmericanTypewriter,AmericanTypewriter-Condensed,AmericanTypewriter-Bold,ChalkboardSE-Light,ChalkboardSE-Regular,ChalkboardSE-Bold,AvenirNext-MediumItalic,AvenirNext-Bold,AvenirNext-UltraLight,AvenirNext-DemiBold,AvenirNext-HeavyItalic,AvenirNext-Heavy,AvenirNext-Medium,AvenirNext-Italic,AvenirNext-UltraLightItalic,AvenirNext-BoldItalic,AvenirNext-Regular,AvenirNext-DemiBoldItalic,BanglaSangamMN,BanglaSangamMN-Bold,Noteworthy-Bold,Noteworthy-Light,Zapfino,TamilSangamMN,TamilSangamMN-Bold,Chalkduster,ArialHebrew-Bold,ArialHebrew-Light,ArialHebrew,Georgia-BoldItalic,Georgia-Bold,Georgia-Italic,Georgia,HelveticaNeue-BoldItalic,HelveticaNeue-Light,HelveticaNeue-UltraLightItalic,HelveticaNeue-CondensedBold,HelveticaNeue-MediumItalic,HelveticaNeue-Thin,HelveticaNeue-Medium,HelveticaNeue-ThinItalic,HelveticaNeue-LightItalic,HelveticaNeue-UltraLight,HelveticaNeue-Bold,HelveticaNeue,HelveticaNeue-CondensedBlack,GillSans,GillSans-Italic,GillSans-BoldItalic,GillSans-Light,GillSans-LightItalic,GillSans-Bold,Palatino-Roman,Palatino-Italic,Palatino-Bold,Palatino-BoldItalic,CourierNewPSMT,CourierNewPS-BoldMT,CourierNewPS-ItalicMT,CourierNewPS-BoldItalicMT,OriyaSangamMN,OriyaSangamMN-Bold,Didot-Bold,Didot-Italic,Didot,DINAlternate-Bold,BodoniSvtyTwoSCITCTT-Book"</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> ([fNames rangeOfString:[fontNames objectAtIndex:indexFont]].location==<span class="built_in">NSNotFound</span>) &#123;</span><br><span class="line"></span><br><span class="line">               <span class="built_in">NSLog</span>(<span class="string">@"Font name: %@"</span>,[fontNames objectAtIndex:indexFont]);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>这个方法可以过滤掉系统自带的字体，只打印所添加的自定义字体名称</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIFont/">UIFont</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
@@ -514,275 +337,22 @@
 
 
 
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
 
-  
-    <article id="post-2013-12-21-gitfen-zhi-de-xue-xi" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/12/21/2013-12-21-gitfen-zhi-de-xue-xi/" class="article-date">
-  	<time datetime="2013-12-21T08:59:00.000Z" itemprop="datePublished">2013-12-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/12/21/2013-12-21-gitfen-zhi-de-xue-xi/">git分支的学习</a>
-    </h1>
-  
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="/img/20131221/git.png">
-<p>git的分支是在git的使用过程中不可避免的，所以简单学习下git的分支的经常使用到的方法</p>
-<p>1.建立本地login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login</span><br></pre></td></tr></table></figure><br>2.切换回本地master分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure><br>3.合并分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge login</span><br></pre></td></tr></table></figure><br>4.删除分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d login</span><br></pre></td></tr></table></figure><br>5.可视化合并工具<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mergetool</span><br></pre></td></tr></table></figure><br>6.提交login分支到远程服务器上<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名]  [分支名]  <span class="comment">//(origin  login)</span></span><br></pre></td></tr></table></figure><br>7.删除远程login分支<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push [远程名] :[分支名]    <span class="comment">//(origin :login)</span></span><br></pre></td></tr></table></figure><br>8.将远程分支login获取下来命名为sf<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b sf origin/login</span><br></pre></td></tr></table></figure><br>9.获取远程分支login简化命令：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --track origin/login</span><br></pre></td></tr></table></figure><br>10.获取远程最新数据<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin</span><br></pre></td></tr></table></figure><br>11.将远程login分支合并到当前的分支中<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/login</span><br></pre></td></tr></table></figure><br>12.获取远程的分支login<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b login origin/login</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Git/">Git</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2013-11-28-dai-ma-shi-xian-autolayout" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/28/2013-11-28-dai-ma-shi-xian-autolayout/" class="article-date">
-  	<time datetime="2013-11-28T07:10:00.000Z" itemprop="datePublished">2013-11-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/28/2013-11-28-dai-ma-shi-xian-autolayout/">代码实现AutoLayout</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。</p>
-<p>##NSLayoutConstraint##<br>在使用NSLayoutConstraint之前，需要了解它几个基本属性：<br><blockquote><p>NSLayoutAttributeBaseline        基线<br>NSLayoutAttributeBottom          底部<br>NSLayoutAttributeCenterX         X轴中点<br>NSLayoutAttributeCenterY         Y轴中点<br>NSLayoutAttributeLeading         头<br>NSLayoutAttributeLeft            左<br>NSLayoutAttributeRight           右<br>NSLayoutAttributeTop             顶部<br>NSLayoutAttributeTrailing        尾<br>NSLayoutAttributeWidth           宽<br>NSLayoutAttributeHeight          高<br>NSLayoutAttributeNotAnAttribute  0 没属性</p>
-</blockquote><br>约束条件：<br><blockquote><p>NSLayoutRelationLessThanOrEqual       -1  小于或等于<br>NSLayoutRelationEqual                 0   等于<br>NSLayoutRelationGreaterThanOrEqual    1   大于或等于</p>
-</blockquote><br>这几个属性和约束条件是我们代码构建AutoLayout的约束(NSLayoutConstraint)经常需要使用到的，NSLayoutConstraint有一个静态方法去构建约束：</p>
-<blockquote><p>Create constraints explicitly.  Constraints are of the form “view1.attr1 = view2.attr2 * multiplier + constant” .If your equation does not have a second view and attribute, use nil and NSLayoutAttributeNotAnAttribute.</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+(<span class="keyword">id</span>)constraintWithItem:(<span class="keyword">id</span>)view1 attribute:(<span class="built_in">NSLayoutAttribute</span>)attr1 relatedBy:(<span class="built_in">NSLayoutRelation</span>)relation toItem:(<span class="keyword">id</span>)view2 attribute:(<span class="built_in">NSLayoutAttribute</span>)attr2 multiplier:(<span class="built_in">CGFloat</span>)multiplier constant:(<span class="built_in">CGFloat</span>)c;</span><br></pre></td></tr></table></figure>
-<p>约束条件的添加需要遵循以下几个方面<br><blockquote><p>1、自身的约束添加到自身View上<br>2、对于两个同层级view之间的约束关系，添加到他们的父view上<br>3、对于两个不同层级view之间的约束关系，添加到他们最近的共同父view上<br>4、对于有层次关系的两个view之间的约束关系，添加到层次较高的父view上</p>
-</blockquote></p>
-<blockquote><p>Single Demo</p>
-<footer><strong>CodeForAutoLayout Demo</strong><cite><a href="https://github.com/ZacksTsang/zackstsang.github.com/blob/master/images/files/CodeForAutoLayout.zip?raw=true" target="_blank" rel="external">github.com/ZacksTsang/zackstsang.github.com/blob/master/images/files/CodeForAutoLayout.zip?raw=true</a></cite></footer></blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2013-11-16-macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/16/2013-11-16-macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/" class="article-date">
-  	<time datetime="2013-11-16T02:03:00.000Z" itemprop="datePublished">2013-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/16/2013-11-16-macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/">Mac系统下git与github的一些简单使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git --version</span><br></pre></td></tr></table></figure><br>回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 <a href="http://git-scm.com/downloads" target="_blank" rel="external">http://git-scm.com/downloads</a> 下载安装</p>
-<p>##创建密钥##<br>首先，查看机器上是否存在密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd ~/.ssh</span><br></pre></td></tr></table></figure><br>如果提示：No such file or directory 说明你是第一次使用git，否则需要移除已存在的key，（注：一般先备份，再移除，可以使用下面的命令）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$mkdir backup</span><br><span class="line">$cp id_rsa* backup</span><br><span class="line">$rm id_rsa*</span><br></pre></td></tr></table></figure><br>重新生成新的密钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh-keygen -t rsa -C &quot;you github email&quot;</span><br></pre></td></tr></table></figure><br>这里会提示输入密码，可以设置一个密码，防止被人往项目里添加代码和内容。生成完后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ls</span><br></pre></td></tr></table></figure><br>可以看到有这三个文件：id_rsa        id_rsa.pub    known_hosts<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$vi id_rsa.pub</span><br></pre></td></tr></table></figure><br>将里面的内容copy，粘贴到GitHub自己账号上的SSH Keys上（注：在GitHub账号管理上会有SSH Keys选项卡，添加一个key，把复制内容拷贝上去就可以了）<br>测试是否连接成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh -v git@github.com</span><br></pre></td></tr></table></figure><br>出现：Hi you name! You’ve successfully authenticated, but GitHub does not provide shell access. 即连接成功，可以进行项目的创建与提交了。</p>
-<p>##Git常用的一些基本命令##<br>在项目的根目录下，初始化本地仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git init</span><br></pre></td></tr></table></figure><br>建立远程连接，和GitHub上的项目建立连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git remote add origin &quot;github的项目地址&quot;</span><br></pre></td></tr></table></figure><br>本地更改文件后，需要提交更改时，（注：下面的命令指示提交到本地的仓库）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$git add -u</span><br><span class="line">$git commit -m &quot;注解&quot;   </span><br></pre></td></tr></table></figure><br>提交更改代码到远程分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git push origin 远程分支名称  </span><br></pre></td></tr></table></figure><br>获取远程分支最新代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git pull origin  远程分支名称   </span><br></pre></td></tr></table></figure><br>撤销更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git reset -u  </span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Git/">Git</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2013-11-15-cai-niao-xue-xi-uinavigation" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/15/2013-11-15-cai-niao-xue-xi-uinavigation/" class="article-date">
-  	<time datetime="2013-11-15T03:53:00.000Z" itemprop="datePublished">2013-11-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/15/2013-11-15-cai-niao-xue-xi-uinavigation/">菜鸟学习UINavigation</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##UINavigation Bar For IOS7##<br>IOS7中将UINavigation Bar和Status Bar连接在一起，给人呈现一种融为一体的感觉，而不再是独立的一部分。</p>
-<img src="/img/20131115/uinavigation_desc.png" class="center">
-<p>UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们只需要操作这几个属性，还有leftBarButtonItems,rightBarButtonItems，下面是我们使用UINavigation Bar过程中会经常用到的方法：</p>
-<p>###设置背景颜色###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBarTintColor:color]]</span><br></pre></td></tr></table></figure><br>如果是使用默认的UINavigationController，则在<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</span><br><span class="line">&#123;</span><br><span class="line">	[[<span class="built_in">UINavigationBar</span> appearance] setBarTintColor:[<span class="built_in">UIColor</span> redColor]]];<span class="comment">//设置自己的颜色</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>而在自定义的UINavigationController中，则<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">	[[<span class="built_in">UINavigationBar</span> appearance] setBarTintColor:[<span class="built_in">UIColor</span> redColor]]];<span class="comment">//设置自己的颜色</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>值得注意的是：如果在子Controller的viewDidLoad中加入此代码时，则会发生切换回其它viewController时，UINavigation Bar背景会改变为子viewController改变的颜色，而当前的viewConroller则不会改变。</p>
-<p>###设置背景图片###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackgroundImage:image forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure></p>
-<p>###设置返回的图片###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackIndicatorImage:image];</span><br><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBackIndicatorTransitionMaskImage:image];</span><br></pre></td></tr></table></figure><br>但需要注意的是，这两个是缺一不可的。</p>
-<p>###设置返回字体颜色###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setTintColor:color];</span><br></pre></td></tr></table></figure></p>
-<p>###自定义标题###<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setTitleTextAttributes:[<span class="built_in">NSDictionary</span> dictionaryWithObjectsAndKeys:</span><br><span class="line">	[<span class="built_in">UIColor</span> colorWithRed:<span class="number">245.0</span>/<span class="number">255.0</span> green:<span class="number">245.0</span>/<span class="number">255.0</span> blue:<span class="number">245.0</span>/<span class="number">255.0</span> alpha:<span class="number">1.0</span>],</span><br><span class="line">	<span class="built_in">NSForegroundColorAttributeName</span>,[<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">22.0</span>],</span><br><span class="line">	<span class="built_in">NSFontAttributeName</span>, <span class="literal">nil</span>]];</span><br></pre></td></tr></table></figure></p>
-<p>###添加按钮###<br>在viewController的viewDidLoad中加，注：下面代码是加单个右按钮，多个则使用rightBarButtonItems，而左按钮则是leftBarButtonItem和leftBarButtonItems。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIBarButtonItem</span> *doneItem = [[<span class="built_in">UIBarButtonItem</span> alloc] initWithBarButtonSystemItem:<span class="built_in">UIBarButtonSystemItemDone</span> target:<span class="keyword">self</span> action:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line"> <span class="keyword">self</span>.navigationItem.rightBarButtonItem = doneItem;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -806,8 +376,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
