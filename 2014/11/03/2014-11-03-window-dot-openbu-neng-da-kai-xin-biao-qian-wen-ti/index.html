@@ -7,25 +7,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>window.open不能打开新标签问题 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
+  <meta name="description" content="什么情形下是不可以的呢？我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
 故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
+123456789var win=window.open(&quot;&quot;);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="window.open不能打开新标签问题">
 <meta property="og:url" content="http://blog.zacksdev.com/2014/11/03/2014-11-03-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
+<meta property="og:description" content="什么情形下是不可以的呢？我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
 故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
-<meta property="og:updated_time" content="2016-04-19T02:59:37.000Z">
+123456789var win=window.open(&quot;&quot;);">
+<meta property="og:updated_time" content="2016-04-19T13:23:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="window.open不能打开新标签问题">
-<meta name="twitter:description" content="##什么情形下是不可以的呢？
-我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
+<meta name="twitter:description" content="什么情形下是不可以的呢？我发现在 angularjs 中的 $http.get/put/post 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 button的 click 事件则是在新的标签页打开的。
 故在异步请求中不能使用 window.open 打开一个新的标签页，解决方案是：
-123456789var win=window.open(&quot;">
+123456789var win=window.open(&quot;&quot;);">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -228,8 +225,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##什么情形下是不可以的呢？</p>
-<p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
+        <h2 id="什么情形下是不可以的呢？"><a href="#什么情形下是不可以的呢？" class="headerlink" title="什么情形下是不可以的呢？"></a>什么情形下是不可以的呢？</h2><p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
 <p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> win=<span class="built_in">window</span>.open(<span class="string">""</span>); <span class="comment">//预先打开一个新的标签页</span></span><br><span class="line"></span><br><span class="line">$http.get(<span class="string">''</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    win.location.href=<span class="string">""</span>; <span class="comment">//需要打开的超链接</span></span><br><span class="line"></span><br><span class="line">&#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
