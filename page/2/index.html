@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/App/" style="font-size: 13.33px;">App</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a>
+						<a href="/tags/App/" style="font-size: 13.33px;">App</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
 					</div>
 				</section>
 				
@@ -178,6 +178,69 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" class="article-date">
+  	<time datetime="2014-11-03T10:01:00.000Z" itemprop="datePublished">2014-11-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/">window.open不能打开新标签问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么情形下是不可以的呢？"><a href="#什么情形下是不可以的呢？" class="headerlink" title="什么情形下是不可以的呢？"></a>什么情形下是不可以的呢？</h2><p>我发现在 angularjs 中的 <code>$http.get/put/post</code> 使用就会被浏览器拦截，经过多次尝试发现异步请求的都会被当成是弹出窗口，会被拦截。 但是直接使用 <code>button</code>的 <code>click</code> 事件则是在新的标签页打开的。</p>
+<p>故在异步请求中不能使用 <code>window.open</code> 打开一个新的标签页，解决方案是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> win=<span class="built_in">window</span>.open(<span class="string">""</span>); <span class="comment">//预先打开一个新的标签页</span></span><br><span class="line"></span><br><span class="line">$http.get(<span class="string">''</span>).success(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    win.location.href=<span class="string">""</span>; <span class="comment">//需要打开的超链接</span></span><br><span class="line"></span><br><span class="line">&#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data, status, headers, config</span>)</span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JS/">JS</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-ru-he-zhi-dao-zi-ding-yi-zi-ti-de-ming-cheng" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -445,77 +508,9 @@
 
 
   
-    <article id="post-cai-niao-xue-xi-uinavigation" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/15/cai-niao-xue-xi-uinavigation/" class="article-date">
-  	<time datetime="2013-11-15T03:53:00.000Z" itemprop="datePublished">2013-11-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/15/cai-niao-xue-xi-uinavigation/">菜鸟学习UINavigation</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="UINavigation-Bar-For-IOS7"><a href="#UINavigation-Bar-For-IOS7" class="headerlink" title="UINavigation Bar For IOS7"></a>UINavigation Bar For IOS7</h2><p>IOS7中将UINavigation Bar和Status Bar连接在一起，给人呈现一种融为一体的感觉，而不再是独立的一部分。</p>
-<img src="/img/20131115/uinavigation_desc.png" class="center">
-<p>UInavigation Bar的几个属性在上图我们可以清晰看到，通常我们只需要操作这几个属性，还有leftBarButtonItems,rightBarButtonItems，下面是我们使用UINavigation Bar过程中会经常用到的方法：</p>
-<h3 id="设置背景颜色"><a href="#设置背景颜色" class="headerlink" title="设置背景颜色"></a>设置背景颜色</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UINavigationBar</span> appearance] setBarTintColor:color]]</span><br></pre></td></tr></table></figure>
-<p>如果是使用默认的UINavigationController，则在<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</span><br><span class="line">&#123;</span><br><span class="line">	[[<span class="built_in">UINavigationBar</span> appearance] setBarTintColor:[<span class="built_in">UIColor</span> redColor]]];<span class="comment">//设置自己的颜色</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2013/11/15/cai-niao-xue-xi-uinavigation/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
