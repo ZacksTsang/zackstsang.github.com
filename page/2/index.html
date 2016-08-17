@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/App/" style="font-size: 16.67px;">App</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
+						<a href="/tags/App/" style="font-size: 20px;">App</a> <a href="/tags/Deploy/" style="font-size: 10px;">Deploy</a> <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
 					</div>
 				</section>
 				
@@ -178,6 +178,76 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-ios-na-xie-nian-,yu-dao-de-keng" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/" class="article-date">
+  	<time datetime="2015-11-19T01:52:00.000Z" itemprop="datePublished">2015-11-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/">[iOS]那些年，遇到的坑</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了<em>工程</em>的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。</p>
+<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><ul>
+<li><p>获取是否允许系统定位</p>
+<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// objc</span></span><br><span class="line"><span class="keyword">if</span>([CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)&#123;</span><br><span class="line">	<span class="comment">// code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> isLocationOn = [CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/#more">Read More >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-requirejs-ji-ben-yuan-li" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -437,73 +507,6 @@
       
         <p class="article-more-link">
           <a  href="/2013/12/21/gitfen-zhi-de-xue-xi/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-dai-ma-shi-xian-autolayout" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/28/dai-ma-shi-xian-autolayout/" class="article-date">
-  	<time datetime="2013-11-28T07:10:00.000Z" itemprop="datePublished">2013-11-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/28/dai-ma-shi-xian-autolayout/">代码实现AutoLayout</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>纵然Xib在Xcode5下可以很好帮助我们快速搭建页面，但是避免不了团队工作中所带来的冲突，这使得Xib搭建页面是个麻烦事，所以在团队开发中避免不了写代码来构建页面，而AutoLayout是IOS6以后的主流页面构建方式。那如何使用代码来实现AutoLayout？其实也不难，NSLayoutConstraint和VFL足以解决这些难题。</p>
-<h2 id="NSLayoutConstraint"><a href="#NSLayoutConstraint" class="headerlink" title="NSLayoutConstraint"></a>NSLayoutConstraint</h2><p>在使用NSLayoutConstraint之前，需要了解它几个基本属性：<br><blockquote><p>NSLayoutAttributeBaseline        基线<br>NSLayoutAttributeBottom          底部<br>NSLayoutAttributeCenterX         X轴中点<br>NSLayoutAttributeCenterY         Y轴中点<br>NSLayoutAttributeLeading         头<br>NSLayoutAttributeLeft            左<br>NSLayoutAttributeRight           右<br>NSLayoutAttributeTop             顶部<br>NSLayoutAttributeTrailing        尾<br>NSLayoutAttributeWidth           宽<br>NSLayoutAttributeHeight          高<br>NSLayoutAttributeNotAnAttribute  0 没属性</p>
-</blockquote><br>约束条件：<br><blockquote><p>NSLayoutRelationLessThanOrEqual       -1  小于或等于<br>NSLayoutRelationEqual                 0   等于<br>NSLayoutRelationGreaterThanOrEqual    1   大于或等于</p>
-</blockquote></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2013/11/28/dai-ma-shi-xian-autolayout/#more">Read More >></a>
         </p>
       
       <div class="clearfix"></div>
