@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/App/" style="font-size: 13.33px;">App</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
+						<a href="/tags/App/" style="font-size: 16.67px;">App</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 16.67px;">UI</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 20px;">objective-c</a> <a href="/tags/skill/" style="font-size: 13.33px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
 					</div>
 				</section>
 				
@@ -178,6 +178,85 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-requirejs-ji-ben-yuan-li" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/25/requirejs-ji-ben-yuan-li/" class="article-date">
+  	<time datetime="2015-09-25T03:48:23.000Z" itemprop="datePublished">2015-09-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/25/requirejs-ji-ben-yuan-li/">【翻译】RequireJS 的基本原理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文翻译来源：<a href="http://www.telerik.com/blogs/requirejs-fundamentals">http://www.telerik.com/blogs/requirejs-fundamentals</a><br>此翻译如有冒犯之处，请联系我 <code>zshaojia@gmail.com</code> 进行删除，且本文不会用于商业用途。</p>
+</blockquote>
+<p>如果你是一个 <code>JavaScript</code> 开发者，也许会见过各种各样的有关于 <code>JavaScript</code> 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上，如何解决这个问题对于你的代码编写是最基本的。</p>
+<h2 id="为什么使用模块"><a href="#为什么使用模块" class="headerlink" title="为什么使用模块"></a>为什么使用模块</h2><p><code>JavaScript</code> 是一个很缺乏模块化开发的脚本语言</p>
+<p><strong>哇！那这意味着什么？为啥缺乏模块化开发？</strong></p>
+<p>如果你第一时间想到这，很好你站在一个很好的队伍。<a href="http://www.twitter.com/derickbaily">Derick Bailey</a> 对于模块化这个概念作了如下诠释：</p>
+<blockquote>
+<p>模块化就是将一组有关联性的东西封装或打包起来，它里面包含了对象、方法、变量，或者其它任何东西。创建模块封装展示它统一的管理方式，我们可以将一些小功能打包起来，以方便放在其它大的模块里使用。</p>
+</blockquote>
+<p>根据这个想法：在 <code>.NET</code> 或 <code>Java</code>，你可以使用类 (classes) 创建一个项目，之后你得到一个编译好的模块，这个模块包含你已声明类。现在你需要在其它项目使用这个模块，那它非常容易地使用，只需将它关联或引入项目里即可。这就是模块封装的概念，但模块在<code>JavaScript</code> 世界里是完全缺失的。</p>
+<p>引起这个问题，大致有一下两点：</p>
+<ol>
+<li><code>JavaScript</code> 一直没有创建模块的语法</li>
+<li><code>JavaScript</code> 没有一个语法让你加载一个已定义的模块，你不得不浪费时间去管理那些乏味的 <code>script</code> 标签名和全局依赖引用</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RequireJS/">RequireJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/JS/">JS</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/25/requirejs-ji-ben-yuan-li/#more">Read More >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -425,71 +504,6 @@
       
         <p class="article-more-link">
           <a  href="/2013/11/28/dai-ma-shi-xian-autolayout/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2013/11/16/macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/" class="article-date">
-  	<time datetime="2013-11-16T02:03:00.000Z" itemprop="datePublished">2013-11-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/11/16/macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/">Mac系统下git与github的一些简单使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git --version</span><br></pre></td></tr></table></figure><br>回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 <a href="http://git-scm.com/downloads">http://git-scm.com/downloads</a> 下载安装</p>
-<h2 id="创建密钥"><a href="#创建密钥" class="headerlink" title="创建密钥"></a>创建密钥</h2><p>首先，查看机器上是否存在密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd ~/.ssh</span><br></pre></td></tr></table></figure><br>如果提示：No such file or directory 说明你是第一次使用git，否则需要移除已存在的key，（注：一般先备份，再移除，可以使用下面的命令）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$mkdir backup</span><br><span class="line">$cp id_rsa* backup</span><br><span class="line">$rm id_rsa*</span><br></pre></td></tr></table></figure><br>重新生成新的密钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh-keygen -t rsa -C &quot;you github email&quot;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/skill/">skill</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Git/">Git</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2013/11/16/macxi-tong-xia-gityu-githubde-[?]-xie-jian-dan-shi-yong/#more">Read More >></a>
         </p>
       
       <div class="clearfix"></div>
