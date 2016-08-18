@@ -5,17 +5,31 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Zacks 的开发随想记</title>
+  <title>Xcode 7 UI Testing 的尝鲜 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="夙兴夜寐枉徒劳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zacks 的开发随想记">
-<meta property="og:url" content="http://blog.zacksdev.com/index.html">
+  <meta name="description" content="本文翻译来源于：http://www.mokacoding.com/blog/xcode-7-ui-testing/ ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。
+注：以下代码都是基于 Xcode 7 Beta 1 和 Swift 2.0。我尽可能使用最新版本来实践，如果我有遗漏的地方，请在底部留言。
+
+WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来一些非常棒的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode 7 UI Testing 的尝鲜">
+<meta property="og:url" content="http://blog.zacksdev.com/2016/08/17/ui-testing-for-try/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="夙兴夜寐枉徒劳">
+<meta property="og:description" content="本文翻译来源于：http://www.mokacoding.com/blog/xcode-7-ui-testing/ ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。
+注：以下代码都是基于 Xcode 7 Beta 1 和 Swift 2.0。我尽可能使用最新版本来实践，如果我有遗漏的地方，请在底部留言。
+
+WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来一些非常棒的">
+<meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-add-test-target.png">
+<meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-record-test.gif">
+<meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-test-report.png">
+<meta property="og:updated_time" content="2016-08-18T09:16:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zacks 的开发随想记">
-<meta name="twitter:description" content="夙兴夜寐枉徒劳">
+<meta name="twitter:title" content="Xcode 7 UI Testing 的尝鲜">
+<meta name="twitter:description" content="本文翻译来源于：http://www.mokacoding.com/blog/xcode-7-ui-testing/ ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。
+注：以下代码都是基于 Xcode 7 Beta 1 和 Swift 2.0。我尽可能使用最新版本来实践，如果我有遗漏的地方，请在底部留言。
+
+WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来一些非常棒的">
+<meta name="twitter:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-add-test-target.png">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -177,9 +191,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-ui-testing-for-try" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ui-testing-for-try" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/08/17/ui-testing-for-try/" class="article-date">
@@ -195,12 +207,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/17/ui-testing-for-try/">Xcode 7 UI Testing 的尝鲜</a>
+    <h1 class="article-title" itemprop="name">
+      Xcode 7 UI Testing 的尝鲜
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Test/">UI Test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Test/">Test</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -262,24 +289,19 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Test/">UI Test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Test/">Test</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/17/jenkins-deploy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins、iOS App 持续构建的极简之道</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -290,320 +312,22 @@
 
 
 
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
 
-  
-    <article id="post-jenkins-deploy" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/17/jenkins-deploy/" class="article-date">
-  	<time datetime="2016-08-17T08:23:45.000Z" itemprop="datePublished">2016-08-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/17/jenkins-deploy/">Jenkins、iOS App 持续构建的极简之道</a>
-    </h1>
-  
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>对于每天都要打包 App 给测试人员，这种重复而低效的工作，自然会被懒癌病患者所厌恶和抛弃。最近也在捣鼓着这一块，遇到一些坑，也搁置了好几天，目前终于完成了。可以一键发布，会从 Github 获取最新项目代码，编译成功后直接发布到 Fir 上。</p>
-</blockquote>
-<p>以下是 <code>Jenkins</code> 自动化编译和发布 <code>iOS App</code> 遇到的一些坑和一些基本步骤，希望可以帮助大家。</p>
-<h2 id="Jenkins-的安装"><a href="#Jenkins-的安装" class="headerlink" title="Jenkins 的安装"></a>Jenkins 的安装</h2><p>在官网 <a href="https://jenkins.io">jenkins.io</a> 下载 war，之前我直接下载了 pkg 安装包，之后不小心创建了 Jenkins 用户，踩了很多坑。实在受不了后直接改用 war ，这样顺利地避免了各种奇怪的问题，通过命令来启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar /Applications/Jenkins/jenkins.war --httpPort=8080</span><br></pre></td></tr></table></figure>
-<p>启动完后在浏览器输入 127.0.0.1:8080 便可以进去 Jenkins 页面</p>
-<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins-page.png?imageMogr2/thumbnail/360x" alt=""></p>
-<p>看到这个画面后，就可以进入持续发布的神奇之旅。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deploy/">Deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Jenkins/">Jenkins</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/17/jenkins-deploy/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-korea-exchange-app" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/02/korea-exchange-app/" class="article-date">
-  	<time datetime="2016-08-02T01:35:57.000Z" itemprop="datePublished">2016-08-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/korea-exchange-app/">韩国换钱 App 分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>韩国换钱 App 简单清晰突出省钱的特性，从哪个换钱所换的钱更加划算。</p>
-</blockquote>
-<p>韩国银行总共 15 家，区域分为：首尔、釜山、大邱、仁川、光州、大田、蔚山、京畿道、江原道、忠清北道、全罗北道、全罗南道、庆尚北道、庆尚南道、济州岛、世宗市</p>
-<h2 id="功能点分析"><a href="#功能点分析" class="headerlink" title="功能点分析"></a>功能点分析</h2><ul>
-<li>主页（银行汇率列表）<ul>
-<li>买入、卖出价选择</li>
-<li>银行选择</li>
-<li>展示货币汇率列表（币种、韩币、手续费率）</li>
-<li>数据来源说明，免责声明</li>
-<li>汇率更新时间、刷新汇率</li>
-</ul>
-</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/02/korea-exchange-app/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-jetradar-app" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/14/jetradar-app/" class="article-date">
-  	<time datetime="2016-07-14T06:35:57.000Z" itemprop="datePublished">2016-07-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/14/jetradar-app/">Jetradar 廉价机票 App 分析</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>「Jetradar」廉价机票，是我司需要分析一下，看是否有可取的地方。该 App 总体思路不错，而且有一点非常重要的就是它只作为连接用户和第三方售卖机票，不做销售方，这点目前国内好像还没有，所以有些好奇其盈利方式。</p>
-</blockquote>
-<h2 id="Jetradar-界面"><a href="#Jetradar-界面" class="headerlink" title="Jetradar 界面"></a>Jetradar 界面</h2><p>总体上该 App 清新脱俗，主界面已将主要功能呈现给了用户，大大方便了用户的使用，这点我也是比较欣赏其原因。</p>
-<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/jetradar_app.jpg?imageMogr2/thumbnail/210x" alt="Jetradar App"></p>
-<p>Jetradar 界面主要分为：</p>
-<ul>
-<li>搜索页面（城市选择，条件过滤页面、排序页面、价格日历页面，所有航班页面、直飞页面，推荐航行页面）</li>
-<li>新搜索页面（搜索存在时，追加）</li>
-<li>多城市选择页面</li>
-<li>历史搜索记录页面</li>
-<li>收藏页面</li>
-<li>价格地图页面</li>
-<li>乘客信息页面</li>
-<li>App 信息页面（技术合作伙伴页面，协议页面）</li>
-<li>设置页面</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/14/jetradar-app/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-visa-country" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/17/visa-country/" class="article-date">
-  	<time datetime="2016-06-17T08:35:57.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/visa-country/">电子签和免签国家</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>由于前期对签证做了些深入调查和分析，列出电子签证的国家供大家参考</p>
-</blockquote>
-<h2 id="电子签"><a href="#电子签" class="headerlink" title="电子签"></a>电子签</h2><ul>
-<li><p>斯里兰卡（签证费用：35 USD）</p>
-<ul>
-<li><a href="http://eta.gov.lk/slvisa/">http://eta.gov.lk/slvisa/</a></li>
-</ul>
-</li>
-<li><p>土耳其（签证费用：60 USD）</p>
-<ul>
-<li><a href="https://www.evisa.gov.tr/zh/">https://www.evisa.gov.tr/zh/</a></li>
-</ul>
-</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/旅游/">旅游</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/签证/">签证</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/06/17/visa-country/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -627,8 +351,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
