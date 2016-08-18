@@ -22,7 +22,7 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-add-test-target.png">
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-record-test.gif">
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-test-report.png">
-<meta property="og:updated_time" content="2016-08-18T09:21:00.000Z">
+<meta property="og:updated_time" content="2016-08-18T09:22:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode 7 UI Testing 的尝鲜">
 <meta name="twitter:description" content="本文翻译来源于：http://www.mokacoding.com/blog/xcode-7-ui-testing/ ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。
@@ -240,12 +240,12 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <blockquote>
 <p>尽管 iOS、OS X 的单元测试在过去两年中变得越来越好，但其它可验收性的测试却没有得到什么改善。</p>
 </blockquote>
-<a id="more"></a>
 <p>好了，可验收性测试这种不利的情况在 Xcode 7 上得到很好的改善，而且变得更好。</p>
 <p>Xcode Beta 7 增加了 “UI Testing Bundle”，通过它我们就可以写和运行可验收性的测试了。</p>
 <p>需要注意的是曾经风靡一时的 <a href="https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html" target="_blank" rel="external">UIAutomation</a> 已经被苹果官方移除，尽管它依然存活在 Instruments 里，但我们不在需要用到它了，我们将使用新的 API 写 UI 测试。</p>
 <p>这些新的 API 对 Swift 和 XCTest 插件的支持非常友好，我们只需要一个简单的快捷键 ⌘U 即可运行已写好的 UI 测试。</p>
 <p>新的测试跟我们以前写的原理差不多，例如我们使用 <a href="https://github.com/kif-framework/KIF" target="_blank" rel="external">KIF</a>，<a href="http://calaba.sh/" target="_blank" rel="external">Calabash</a>，<a href="http://appium.io/" target="_blank" rel="external">Appium</a> 等等写的一样，它能像人为一样操作 app，这得益于 iOS <a href="https://developer.apple.com/accessibility/" target="_blank" rel="external">Accessibility</a> 的交互协议，这些在 iOS 9 上都得到很大的提升。</p>
+<a id="more"></a>
 <h2 id="开启-Xcode-7-UI-测试之旅"><a href="#开启-Xcode-7-UI-测试之旅" class="headerlink" title="开启 Xcode 7 UI 测试之旅"></a>开启 Xcode 7 UI 测试之旅</h2><p>当开始时，我们要意识到尝鲜的代价，可能会有很多坑等着你来踩，所以我提醒你一定要使用  Xcode 7 和 项目基于 iOS 9。</p>
 <p>在这篇文章中，我们会重写以前使用第三方 UI 测试架构写过的一个项目 <a href="https://github.com/mokacoding/Bench/tree/xcode-7" target="_blank" rel="external">Bench</a>。如果你想了解更多如何写 UI 测试的话，可以查看这两篇 <a href="http://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/" target="_blank" rel="external">文章</a> 。</p>
 <p>在 Bench 项目中，首先需要新增一个 target，你会在 Xcode 7 上看到一个专门的测试项。</p>
