@@ -411,7 +411,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/11/ui-testing-for-try/">Xcode 7 UI Testing 的尝鲜</a>
+      <a class="article-title" href="/2015/08/11/ui-testing-for-try/">Xcode 7 UI Testing 的抢先骗</a>
     </h1>
   
 
@@ -426,12 +426,12 @@
 </blockquote>
 <p>WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来一些非常棒的消息。我在另外篇文章 <a href="http://www.mokacoding.com/blog/ios-testing-in-2015/">2015 iOS 的测试前景</a> 中写道：</p>
 <blockquote>
-<p>尽管 iOS、OS X 的单元测试在过去两年中变得越来越好，但其它可验收性的测试却没有得到什么改善。</p>
+<p>尽管 iOS、OS X 的单元测试在过去两年中变得越来越好，但其它可验收性的测试（UI 测试）却没有得到什么改善。</p>
 </blockquote>
-<p>好了，可验收性测试这种不利的情况在 Xcode 7 上得到很好的改善，而且变得更好。</p>
-<p>Xcode Beta 7 增加了 “UI Testing Bundle”，通过它我们就可以写和运行可验收性的测试了。</p>
+<p>好了，可验收性测试（UI 测试）这种不利的情况在 Xcode 7 上得到很好的改善，而且变得更好。</p>
+<p>Xcode Beta 7 增加了 “UI Testing Bundle”，通过它我们就可以写和运行可验收性（UI 测试）的测试了。</p>
 <p>需要注意的是曾经风靡一时的 <a href="https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html">UIAutomation</a> 已经被苹果官方移除，尽管它依然存活在 Instruments 里，但我们不在需要用到它了，我们将使用新的 API 写 UI 测试。</p>
-<p>这些新的 API 对 Swift 和 XCTest 插件的支持非常友好，我们只需要一个简单的快捷键 ⌘U 即可运行已写好的 UI 测试。</p>
+<p>这些新的 API 对 Swift 和 XCTest 插件的支持非常友好，我们只需要一个简单的快捷键 <code>⌘U</code> 即可运行已写好的 UI 测试。</p>
 <p>新的测试跟我们以前写的原理差不多，例如我们使用 <a href="https://github.com/kif-framework/KIF">KIF</a>，<a href="http://calaba.sh/">Calabash</a>，<a href="http://appium.io/">Appium</a> 等等写的一样，它能像人为一样操作 app，这得益于 iOS <a href="https://developer.apple.com/accessibility/">Accessibility</a> 的交互协议，这些在 iOS 9 上都得到很大的提升。</p>
       
     </div>
