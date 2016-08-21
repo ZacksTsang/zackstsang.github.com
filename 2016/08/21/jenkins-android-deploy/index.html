@@ -5,17 +5,29 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Archives: 2016 | Zacks 的开发随想记</title>
+  <title>Jenkins、Android App 持续构建的极简之道 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="夙兴夜寐枉徒劳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zacks 的开发随想记">
-<meta property="og:url" content="http://blog.zacksdev.com/archives/2016/index.html">
+  <meta name="description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
+
+在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins、Android App 持续构建的极简之道">
+<meta property="og:url" content="http://blog.zacksdev.com/2016/08/21/jenkins-android-deploy/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="夙兴夜寐枉徒劳">
+<meta property="og:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
+
+在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_01.png?imageMogr2/thumbnail/360x">
+<meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_03.png?imageMogr2/thumbnail/360x">
+<meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_02.png?imageMogr2/thumbnail/360x">
+<meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_06.png?imageMogr2/thumbnail/360x">
+<meta property="og:updated_time" content="2016-08-21T05:46:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zacks 的开发随想记">
-<meta name="twitter:description" content="夙兴夜寐枉徒劳">
+<meta name="twitter:title" content="Jenkins、Android App 持续构建的极简之道">
+<meta name="twitter:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
+
+在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta name="twitter:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_01.png?imageMogr2/thumbnail/360x">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -176,201 +188,115 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-jenkins-android-deploy" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/21/jenkins-android-deploy/" class="archive-article-date">
-  	<time datetime="2016-08-21T05:45:23.000Z" itemprop="datePublished">Aug 21</time>
+    <div class="article-meta">
+      <a href="/2016/08/21/jenkins-android-deploy/" class="article-date">
+  	<time datetime="2016-08-21T05:45:23.000Z" itemprop="datePublished">2016-08-21</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/21/jenkins-android-deploy/">Jenkins、Android App 持续构建的极简之道</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jenkins、Android App 持续构建的极简之道
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deploy/">Deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
 	</div>
 
-          
+        
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/Jenkins/">Jenkins</a>
 	</div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在上一篇 <a href="http://blog.zacksdev.com/2016/08/17/jenkins-deploy/">Jenkins、iOS App 持续构建的极简之道</a> 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。</p>
+</blockquote>
+<p>在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 <code>gradle</code> 插件即可，当然前提是开发 Android App 时，使用 <code>gradle</code>。 </p>
+<p>在管理插件里的可选插件直接搜索 <code>gradle</code> 进行安装。</p>
+<p>安装完后，在系统管理选择系统设置（全局环境&amp;路径）里面有项 gradle 配置，配置好 <code>gradle</code> 的路径，主要填写 <code>gradle</code> 的名称和路径，路径跟 Android studio 里的配置一致即可。</p>
+<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_01.png?imageMogr2/thumbnail/360x" alt=""></p>
+<p>完成后开始创建 Android App 项目。</p>
+<a id="more"></a>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>创建一个自由化项目</p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>选择 git：</p>
+<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_03.png?imageMogr2/thumbnail/360x" alt=""></p>
+<ul>
+<li><code>Repository URL</code>：项目 git 位置</li>
+<li><code>Credentials</code>：选择前面建立的 ssh 用户</li>
+<li><code>Branch Specifier (blank for &#39;any&#39;)</code>：项目的分支</li>
+</ul>
+<h3 id="构建步骤"><a href="#构建步骤" class="headerlink" title="构建步骤"></a>构建步骤</h3><p>选择 <code>Invoke Gradle Script</code></p>
+<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_02.png?imageMogr2/thumbnail/360x" alt=""></p>
+<ul>
+<li><code>Invoke Gradle</code>：选择配合好的 gradle 即可</li>
+<li><code>Tasks</code>：填写 <code>clean</code> 和 Release 的渠道，这里我有个渠道叫 <code>share</code>，所以填写了 <code>assembleshare</code> (更多用法可以参考 <a href="https://gradle.org/getting-started-android-build/" target="_blank" rel="external">gradle 官网</a>)</li>
+</ul>
+<h3 id="构建后操作步骤"><a href="#构建后操作步骤" class="headerlink" title="构建后操作步骤"></a>构建后操作步骤</h3><p>选择 <code>Upload to fir.im</code>，配置好 fir 的 token 即可</p>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p>保存项目完成基本的配置，可以立即构建测试效果，如果看到如下图，表示已经成功完成一次构建之旅。</p>
+<p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_06.png?imageMogr2/thumbnail/360x" alt=""></p>
+
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/17/jenkins-deploy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins、iOS App 持续构建的极简之道</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/17/jenkins-deploy/" class="archive-article-date">
-  	<time datetime="2016-08-17T08:23:45.000Z" itemprop="datePublished">Aug 17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/17/jenkins-deploy/">Jenkins、iOS App 持续构建的极简之道</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deploy/">Deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Jenkins/">Jenkins</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/02/korea-exchange-app/" class="archive-article-date">
-  	<time datetime="2016-08-02T01:35:57.000Z" itemprop="datePublished">Aug 2</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/02/korea-exchange-app/">韩国换钱 App 分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/07/14/jetradar-app/" class="archive-article-date">
-  	<time datetime="2016-07-14T06:35:57.000Z" itemprop="datePublished">Jul 14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/14/jetradar-app/">Jetradar 廉价机票 App 分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/17/visa-country/" class="archive-article-date">
-  	<time datetime="2016-06-17T08:35:57.000Z" itemprop="datePublished">Jun 17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/17/visa-country/">电子签和免签国家</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/旅游/">旅游</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/签证/">签证</a></li></ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品分析/">产品分析</a>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2016/page/2/">2</a><a class="extend next" rel="next" href="/archives/2016/page/2/">Next &raquo;</a>
-    </nav>
-  
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
 </div>
       <footer id="footer">
@@ -396,8 +322,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
