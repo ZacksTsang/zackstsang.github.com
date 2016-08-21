@@ -22,7 +22,7 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-add-test-target.png">
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-record-test.gif">
 <meta property="og:image" content="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-test-report.png">
-<meta property="og:updated_time" content="2016-08-21T08:31:49.000Z">
+<meta property="og:updated_time" content="2016-08-21T08:47:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xcode 7 UI Testing 的抢先骗">
 <meta name="twitter:description" content="本文翻译来源于：http://www.mokacoding.com/blog/xcode-7-ui-testing/ ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。
@@ -245,7 +245,7 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <p>这些新的 API 对 Swift 和 XCTest 插件的支持非常友好，我们只需要一个简单的快捷键 <code>⌘U</code> 即可运行已写好的 UI 测试。</p>
 <p>新的测试跟我们以前写的原理差不多，例如我们使用 <a href="https://github.com/kif-framework/KIF" target="_blank" rel="external">KIF</a>，<a href="http://calaba.sh/" target="_blank" rel="external">Calabash</a>，<a href="http://appium.io/" target="_blank" rel="external">Appium</a> 等等写的一样，它能像人为一样操作 app，这得益于 iOS <a href="https://developer.apple.com/accessibility/" target="_blank" rel="external">Accessibility</a> 的交互协议，这些在 iOS 9 上都得到很大的提升。</p>
 <a id="more"></a>
-<h2 id="开启-Xcode-7-UI-测试之旅"><a href="#开启-Xcode-7-UI-测试之旅" class="headerlink" title="开启 Xcode 7 UI 测试之旅"></a>开启 Xcode 7 UI 测试之旅</h2><p>当开始时，我们要意识到尝鲜的代价，可能会有很多坑等着你来踩，所以我提醒你项目一定要使用  Xcode 7 和基于 iOS 9 进行开发。</p>
+<h2 id="开启-Xcode-7-UI-测试之旅"><a href="#开启-Xcode-7-UI-测试之旅" class="headerlink" title="开启 Xcode 7 UI 测试之旅"></a>开启 Xcode 7 UI 测试之旅</h2><p>在开始尝试之前，我们要意识到尝鲜的代价，可能会有很多坑等着你来踩，所以我提醒你项目一定要使用  Xcode 7 和基于 iOS 9 进行开发。</p>
 <p>在这篇文章中，我们会重写以前使用第三方 UI 测试架构写过的一个项目 <a href="https://github.com/mokacoding/Bench/tree/xcode-7" target="_blank" rel="external">Bench</a>。如果你想了解更多如何写 UI 测试的话，可以查看这两篇 <a href="http://www.mokacoding.com/blog/job-stories-acceptance-tests-with-kif-and-specta/" target="_blank" rel="external">文章</a> 。</p>
 <p>在 Bench 项目中，首先需要新增一个 target，你会在 Xcode 7 上看到一个专门的测试项。</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-add-test-target.png" alt=""></p>
@@ -258,10 +258,10 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">testSayHello() &#123;</span><br><span class="line">  let app = XCUIApplication()</span><br><span class="line">  app.buttons[&quot;say hello&quot;].tap()</span><br><span class="line">  app.alerts[&quot;Hello&quot;].collectionViews.buttons[&quot;Dismiss&quot;].tap()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>正如你所看到的语法是非常简单的，当我们运行测试时，在控制台会看到如下信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Test Case &apos;-[BenchUITests.BenchUITests testSayHello]&apos; started.</span><br><span class="line">2015-06-15 19:36:13.494 XCTRunner[3123:9611325] Continuing to run tests in the background with task ID 1</span><br><span class="line">  t =     1.60s     Wait for app to idle</span><br><span class="line">  t =     1.81s     Tap the &quot;say hello&quot; Button</span><br><span class="line">  t =     1.81s         Wait for app to idle</span><br><span class="line">  t =     1.81s         Find the &quot;say hello&quot; Button</span><br><span class="line">  t =     1.84s         Dispatch the event</span><br><span class="line">  t =     2.08s         Wait for app to idle</span><br><span class="line">  t =     2.10s     Tap the &quot;Dismiss&quot; Button</span><br><span class="line">  t =     2.10s         Wait for app to idle</span><br><span class="line">  t =     2.56s         Find the &quot;Dismiss&quot; Button</span><br><span class="line">  t =     2.57s         Dispatch the event</span><br><span class="line">  t =     2.81s         Wait for app to idle</span><br><span class="line">Test Case &apos;-[BenchUITests.BenchUITests testSayHello]&apos; passed (3.215 seconds).</span><br></pre></td></tr></table></figure>
-<p>这些输出信息记录了从开始测试到各种动作和花费的时间，这些对我们检查 app 的问题起到很大的作用，就像数鸡蛋一样。</p>
+<p>这些输出信息记录了从开始测试到各种动作和花费的时间，这些对我们检查 app 的问题起到很大的作用，就像检测鸡蛋一样。</p>
 <p>你也可以这样看测试报告，当你点击 inspector 按钮时会看到如下图一样的 app 测试失败状态页面。</p>
 <p><img src="https://s3.amazonaws.com/mokacoding/2015-06-16-xcode-7-test-report.png" alt=""> </p>
-<p>你也许也注意到这测试跟人为的测试没有什么不同之处。</p>
+<p>你也许也注意到这测试跟人进行的测试没有什么不同之处。</p>
 <h2 id="App-状态的断言"><a href="#App-状态的断言" class="headerlink" title="App 状态的断言"></a>App 状态的断言</h2><p>Bench 的第二个测试标准是：当点击 “show elements” 按钮，会看到一个列表元素。</p>
 <p>这个测试通过录制生成的代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func testShowElements() &#123;</span><br><span class="line">  let app = XCUIApplication()</span><br><span class="line">  app.buttons[&quot;show elements&quot;].tap()</span><br><span class="line">  app.tables.staticTexts[&quot;[N] Nitrogen (7)&quot;].swipeUp()</span><br><span class="line">  app.tables.staticTexts[&quot;[Ir] Iridium (77)&quot;].swipeUp()</span><br><span class="line">  app.tables.staticTexts[&quot;[Tl] Thallium (81)&quot;].swipeUp()</span><br><span class="line">  app.tables.staticTexts[&quot;[Uut] Ununtrium (113)&quot;].swipeUp()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -281,8 +281,8 @@ WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来�
 <p>以上就是我们在 Xcode 7 上第一次完整的 UI 测试。</p>
 <p>完整的测试应该是这样子的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func testShowElements() &#123;</span><br><span class="line">  let app = XCUIApplication()</span><br><span class="line">  app.buttons[&quot;show elements&quot;].tap()</span><br><span class="line"></span><br><span class="line">  XCTAssertEqual(app.tables.count, 1)</span><br><span class="line"></span><br><span class="line">  let table = app.tables.elementAtIndex(0)</span><br><span class="line">  let expectedNumberOfElements: UInt = 118</span><br><span class="line">  XCTAssertEqual(table.cells.count, expectedNumberOfElements)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我自己对新的框架非常满意，将会不断使用这个框架来自动化测试 app，我想 Apple 给出的信息也十分明确，他们十分重视这系列的 UI 测试，所以我们也应当成为 UI 测试的先行者，推动 UI 测试的发展。</p>
-<h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><p>首先，它会是不错的框架去尝试更复杂的场景，上面的测试标准我们设置的十分简单，这只是叫我们如何使用新的框架，而不是介绍它如何的强大。</p>
+<p>我自己对新的框架非常满意，将会不断使用这个框架来自动化测试 app，Apple 给出的信息也十分明确，他们十分重视这系列的 UI 测试，所以我们也应当成为 UI 测试的先行者，推动 UI 测试的发展。</p>
+<h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><p>首先，它会是不错的框架去尝试更复杂的场景，上面的测试标准我们设置的十分简单，只是教我们如何使用新的 UI 测试框架，而不是介绍它如何的强大。</p>
 <p>在真实的测试环境中，经常会有网络、动画进入等等各种 app 启动状态和更复杂的使用场景。</p>
 <p>另外有趣的是挖掘 UI 测试能否通过命令来启动和在 CI 环境下自动完成测试。</p>
 <blockquote>
