@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_03.png?imageMogr2/thumbnail/360x">
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_02.png?imageMogr2/thumbnail/360x">
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_06.png?imageMogr2/thumbnail/360x">
-<meta property="og:updated_time" content="2016-08-21T05:46:04.000Z">
+<meta property="og:updated_time" content="2016-08-21T06:04:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins、Android App 持续构建的极简之道">
 <meta name="twitter:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
@@ -252,7 +252,9 @@
 <li><code>Invoke Gradle</code>：选择配合好的 gradle 即可</li>
 <li><code>Tasks</code>：填写 <code>clean</code> 和 Release 的渠道，这里我有个渠道叫 <code>share</code>，所以填写了 <code>assembleshare</code> (更多用法可以参考 <a href="https://gradle.org/getting-started-android-build/" target="_blank" rel="external">gradle 官网</a>)</li>
 </ul>
+<p>这里需要注意的是，因为签名那些不好提交到服务器上，还需要注意安全问题，所以自动化打包是无签名的 app。目前在 Jenkins 上还没找到管理 Android App 签名的工具，如果大家有更好的解决方案可以在底部留言告诉我，十分感谢。</p>
 <h3 id="构建后操作步骤"><a href="#构建后操作步骤" class="headerlink" title="构建后操作步骤"></a>构建后操作步骤</h3><p>选择 <code>Upload to fir.im</code>，配置好 fir 的 token 即可</p>
+<p>上传 apk 时，注意：unsigin apk 会有有问题，安装不了，所以需要上传的是 xxxxx-debug.apk 文件。</p>
 <h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p>保存项目完成基本的配置，可以立即构建测试效果，如果看到如下图，表示已经成功完成一次构建之旅。</p>
 <p><img src="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_06.png?imageMogr2/thumbnail/360x" alt=""></p>
 
