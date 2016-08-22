@@ -17,7 +17,7 @@
 <meta property="og:description" content="前端开发一直处于不断地更新和迭代的苦逼状态，而前端的工程管理也各式各样，以前我有使用过 Grunt 进行管理一些 css、js，但最近 Gulp 的横空出世，像一股清流，让前端的世界变得异常清晰起来。我也开始从 Grunt 转向 Gulp 的怀抱。
 
 前端的发现一直是处于快速的发展，各种第三方库层出不穷，这让我们有种疲于奔命感觉，项目也不断地在重构中。2014 ~ 2015年期间，NodeJS">
-<meta property="og:updated_time" content="2016-08-22T06:41:23.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:43:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gulp 前端的扁平化管理艺术">
 <meta name="twitter:description" content="前端开发一直处于不断地更新和迭代的苦逼状态，而前端的工程管理也各式各样，以前我有使用过 Grunt 进行管理一些 css、js，但最近 Gulp 的横空出世，像一股清流，让前端的世界变得异常清晰起来。我也开始从 Grunt 转向 Gulp 的怀抱。
@@ -229,6 +229,7 @@
 </blockquote>
 <p>前端的发现一直是处于快速的发展，各种第三方库层出不穷，这让我们有种疲于奔命感觉，项目也不断地在重构中。2014 ~ 2015年期间，<code>NodeJS</code> 的火爆现象促使了前端各项管理工具的繁荣发展，涌现了各种管理工具，例如：<code>webpack</code>、<code>grunt</code>、<code>gulp</code> 等等。</p>
 <p>项目一开始是使用 grunt 来管理 scss 的编译和生成，后面逐渐地将 gulp 替代了 grunt，其实两者的处理方式是一样的，但 gulp 相对于 grunt 还是比较的活跃，而且更具有新时代的气息，故改用 gulp，免除后续更新迭代和维护难问题。项目是使用 <code>golang</code> 语言中的 <code>beego</code> web 框架进行开发的，所以 gulp 只是单纯地用来管理 scss、js。</p>
+<a id="more"></a>
 <h2 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h2><p>在使用 gulp 之前，我们需要安装 nodejs，而 nodejs里面包含了一个非常出色的 npm 包管理工具，安装 <a href="https://nodejs.org/en/download/" target="_blank" rel="external">NodeJS</a>，如果有 <code>homebrew</code>，则可以通过 <code>brew install node</code> 此命令进行安装，安装完成之后，运行 <code>node -v</code> 查看是否安装成功。node 安装成功后，检查 npm 是否成功安装，运行 <code>npm -v</code> 命令，会看到 npm 的版本信息，否则安装不成功。</p>
 <p>前面步骤都完成后，然后安装 <code>gulp</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --global gulp</span><br></pre></td></tr></table></figure>
