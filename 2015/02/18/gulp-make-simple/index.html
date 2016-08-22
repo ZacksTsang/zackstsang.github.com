@@ -5,17 +5,24 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Zacks 的开发随想记</title>
+  <title>Gulp 前端的扁平化管理艺术 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="夙兴夜寐枉徒劳">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zacks 的开发随想记">
-<meta property="og:url" content="http://blog.zacksdev.com/page/2/index.html">
+  <meta name="description" content="前端开发一直处于不断地更新和迭代的苦逼状态，而前端的工程管理也各式各样，以前我有使用过 Grunt 进行管理一些 css、js，但最近 Gulp 的横空出世，像一股清流，让前端的世界变得异常清晰起来。我也开始从 Grunt 转向 Gulp 的怀抱。
+
+前端的发现一直是处于快速的发展，各种第三方库层出不穷，这让我们有种疲于奔命感觉，项目也不断地在重构中。2014 ~ 2015年期间，NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp 前端的扁平化管理艺术">
+<meta property="og:url" content="http://blog.zacksdev.com/2015/02/18/gulp-make-simple/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="夙兴夜寐枉徒劳">
+<meta property="og:description" content="前端开发一直处于不断地更新和迭代的苦逼状态，而前端的工程管理也各式各样，以前我有使用过 Grunt 进行管理一些 css、js，但最近 Gulp 的横空出世，像一股清流，让前端的世界变得异常清晰起来。我也开始从 Grunt 转向 Gulp 的怀抱。
+
+前端的发现一直是处于快速的发展，各种第三方库层出不穷，这让我们有种疲于奔命感觉，项目也不断地在重构中。2014 ~ 2015年期间，NodeJS">
+<meta property="og:updated_time" content="2016-08-22T06:41:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zacks 的开发随想记">
-<meta name="twitter:description" content="夙兴夜寐枉徒劳">
+<meta name="twitter:title" content="Gulp 前端的扁平化管理艺术">
+<meta name="twitter:description" content="前端开发一直处于不断地更新和迭代的苦逼状态，而前端的工程管理也各式各样，以前我有使用过 Grunt 进行管理一些 css、js，但最近 Gulp 的横空出世，像一股清流，让前端的世界变得异常清晰起来。我也开始从 Grunt 转向 Gulp 的怀抱。
+
+前端的发现一直是处于快速的发展，各种第三方库层出不穷，这让我们有种疲于奔命感觉，项目也不断地在重构中。2014 ~ 2015年期间，NodeJS">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -176,301 +183,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-xcurrency" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/08/xcurrency/" class="article-date">
-  	<time datetime="2016-05-08T04:35:57.000Z" itemprop="datePublished">2016-05-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/08/xcurrency/">「极简汇率」美且好用的汇率换算</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>「极简汇率」是我司的一个得意之作，这得佩服我家 CEO 的独特眼界，开创了汇率工具在旅游分类先河，致使后来在汇率排行榜比较高的汇率工具，无一例外都选择了旅游这个分类。</p>
-</blockquote>
-<h2 id="一款真正意义上的旅游汇率-App"><a href="#一款真正意义上的旅游汇率-App" class="headerlink" title="一款真正意义上的旅游汇率 App"></a>一款真正意义上的旅游汇率 App</h2><p>这款产品的初衷是想解决旅游中大家对于自己花费度的把握，防止出现被坑的现象，基于此我们开始了研发这款 App，而且我们将极简汇率放在 AppStore 的旅游分类下。其实一开始我觉得不可以放在旅游分类下，不应该是在理财工具分类么？CEO 坚持要放在旅游的分类下，因为我们是为旅行者解决问题的，事实证明此选择是正确的。的确，在境外游中，我们难免会有买买买，吃吃吃的野心，但是又怕自己被坑或开销过大，那怎么办？只能查汇率来辅助自己抉择，完成自己吃货、购物的欲望。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/产品/">产品</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/05/08/xcurrency/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ios-na-xie-nian-,yu-dao-de-keng" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/" class="article-date">
-  	<time datetime="2015-11-19T01:52:00.000Z" itemprop="datePublished">2015-11-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/">[iOS]那些年，遇到的坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了<em>工程</em>的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。</p>
-<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><ul>
-<li><p>获取是否允许系统定位</p>
-<p>  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 <code>BOOL</code> 值，直接使用以下这种方式进行判断：</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// objc</span></span><br><span class="line"><span class="keyword">if</span>([CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)&#123;</span><br><span class="line">	<span class="comment">// code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样简单快捷，不用额外增加变量，在一次开销的情况下，这样做是没啥大问题，但在多次使用的情况下，这就会带来性能上问题，因为其读取速度有些慢，在多次操作下就会变得异常的慢。所以有多次开销的情况，建议使用变量来存储该值，再使用其变量去操作，避免不必要的系统开销。</p>
-  <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BOOL</span> isLocationOn = [CLLocationManager locationServicesEnabled]&amp;&amp;[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/objective-c/">objective-c</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-requirejs-ji-ben-yuan-li" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/25/requirejs-ji-ben-yuan-li/" class="article-date">
-  	<time datetime="2015-09-25T03:48:23.000Z" itemprop="datePublished">2015-09-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/25/requirejs-ji-ben-yuan-li/">【翻译】RequireJS 的基本原理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文翻译来源：<a href="http://www.telerik.com/blogs/requirejs-fundamentals">http://www.telerik.com/blogs/requirejs-fundamentals</a><br>此翻译如有冒犯之处，请联系我 <code>zshaojia@gmail.com</code> 进行删除，且本文不会用于商业用途。</p>
-</blockquote>
-<p>如果你是一个 <code>JavaScript</code> 开发者，也许会见过各种各样的有关于 <code>JavaScript</code> 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上，如何解决这个问题对于你的代码编写是最基本的。</p>
-<h2 id="为什么使用模块"><a href="#为什么使用模块" class="headerlink" title="为什么使用模块"></a>为什么使用模块</h2><p><code>JavaScript</code> 是一个很缺乏模块化开发的脚本语言</p>
-<p><strong>哇！那这意味着什么？为啥缺乏模块化开发？</strong></p>
-<p>如果你第一时间想到这，很好你站在一个很好的队伍。<a href="http://www.twitter.com/derickbaily">Derick Bailey</a> 对于模块化这个概念作了如下诠释：</p>
-<blockquote>
-<p>模块化就是将一组有关联性的东西封装或打包起来，它里面包含了对象、方法、变量，或者其它任何东西。创建模块封装展示它统一的管理方式，我们可以将一些小功能打包起来，以方便放在其它大的模块里使用。</p>
-</blockquote>
-<p>根据这个想法：在 <code>.NET</code> 或 <code>Java</code>，你可以使用类 (classes) 创建一个项目，之后你得到一个编译好的模块，这个模块包含你已声明类。现在你需要在其它项目使用这个模块，那它非常容易地使用，只需将它关联或引入项目里即可。这就是模块封装的概念，但模块在<code>JavaScript</code> 世界里是完全缺失的。</p>
-<p>引起这个问题，大致有一下两点：</p>
-<ol>
-<li><code>JavaScript</code> 一直没有创建模块的语法</li>
-<li><code>JavaScript</code> 没有一个语法让你加载一个已定义的模块，你不得不浪费时间去管理那些乏味的 <code>script</code> 标签名和全局依赖引用</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RequireJS/">RequireJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/JS/">JS</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/25/requirejs-ji-ben-yuan-li/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ui-testing-for-try" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/11/ui-testing-for-try/" class="article-date">
-  	<time datetime="2015-08-11T03:15:10.000Z" itemprop="datePublished">2015-08-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/11/ui-testing-for-try/">Xcode 7 UI Testing 的抢先骗</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文翻译来源于：<a href="http://www.mokacoding.com/blog/xcode-7-ui-testing/">http://www.mokacoding.com/blog/xcode-7-ui-testing/</a> ，如有不妥之处请联系我进行删除，承诺本文不会用于商业用途。</p>
-<p>注：以下代码都是基于 Xcode 7 Beta 1 和 Swift 2.0。我尽可能使用最新版本来实践，如果我有遗漏的地方，请在底部留言。</p>
-</blockquote>
-<p>WWDC 2015 或许没给我们带来太大的惊喜，但它还是给我们带来一些非常棒的消息。我在另外篇文章 <a href="http://www.mokacoding.com/blog/ios-testing-in-2015/">2015 iOS 的测试前景</a> 中写道：</p>
-<blockquote>
-<p>尽管 iOS、OS X 的单元测试在过去两年中变得越来越好，但其它可验收性的测试（UI 测试）却没有得到什么改善。</p>
-</blockquote>
-<p>好了，可验收性测试（UI 测试）这种不利的情况在 Xcode 7 上得到很好的改善，而且变得更好。</p>
-<p>Xcode Beta 7 增加了 “UI Testing Bundle”，通过它我们就可以写和运行可验收性（UI 测试）的测试了。</p>
-<p>需要注意的是曾经风靡一时的 <a href="https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/UsingtheAutomationInstrument/UsingtheAutomationInstrument.html">UIAutomation</a> 已经被苹果官方移除，尽管它依然存活在 Instruments 里，但我们不在需要用到它了，我们将使用新的 API 写 UI 测试。</p>
-<p>这些新的 API 对 Swift 和 XCTest 插件的支持非常友好，我们只需要一个简单的快捷键 <code>⌘U</code> 即可运行已写好的 UI 测试。</p>
-<p>新的测试跟我们以前写的原理差不多，例如我们使用 <a href="https://github.com/kif-framework/KIF">KIF</a>，<a href="http://calaba.sh/">Calabash</a>，<a href="http://appium.io/">Appium</a> 等等写的一样，它能像人为一样操作 app，这得益于 iOS <a href="https://developer.apple.com/accessibility/">Accessibility</a> 的交互协议，这些在 iOS 9 上都得到很大的提升。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Test/">UI Test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Test/">Test</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/11/ui-testing-for-try/#more">Read More >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-gulp-make-simple" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-gulp-make-simple" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/02/18/gulp-make-simple/" class="article-date">
@@ -486,12 +199,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/18/gulp-make-simple/">Gulp 前端的扁平化管理艺术</a>
+    <h1 class="article-title" itemprop="name">
+      Gulp 前端的扁平化管理艺术
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gulp/">Gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/project/">project</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Project/">Project</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -520,24 +248,28 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gulp/">Gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/project/">project</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Project/">Project</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/11/ui-testing-for-try/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Xcode 7 UI Testing 的抢先骗
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/11/03/window-dot-openbu-neng-da-kai-xin-biao-qian-wen-ti/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">window.open不能打开新标签问题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -548,13 +280,22 @@
 
 
 
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
 
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-    </nav>
-  
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -578,8 +319,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
