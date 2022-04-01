@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Web 入门指引 | Zacks 的开发随想记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="目前想快速入门 web 这块需要从其官网入手，我们面向用户端主要使用 vue，面向管理平台主要是 ant design pro。
+几个重要概念要提前了解，SPA、SSR、proxy、浏览器缓存、router
+基础知识
+http://es6.ruanyifeng.com/#docs/style
+https://www.typescriptlang.org/
+https://developer.moz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web 入门指引">
+<meta property="og:url" content="http://blog.zacksdev.com/2022/04/01/web-base/index.html">
+<meta property="og:site_name" content="Zacks 的开发随想记">
+<meta property="og:description" content="目前想快速入门 web 这块需要从其官网入手，我们面向用户端主要使用 vue，面向管理平台主要是 ant design pro。
+几个重要概念要提前了解，SPA、SSR、proxy、浏览器缓存、router
+基础知识
+http://es6.ruanyifeng.com/#docs/style
+https://www.typescriptlang.org/
+https://developer.moz">
+<meta property="og:updated_time" content="2022-04-01T06:57:26.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web 入门指引">
+<meta name="twitter:description" content="目前想快速入门 web 这块需要从其官网入手，我们面向用户端主要使用 vue，面向管理平台主要是 ant design pro。
+几个重要概念要提前了解，SPA、SSR、proxy、浏览器缓存、router
+基础知识
+http://es6.ruanyifeng.com/#docs/style
+https://www.typescriptlang.org/
+https://developer.moz">
+  
+    <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xt3qs.com2.z0.glb.clouddn.com/avator.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zacks Tsang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">iOS、Android、前端的碎碎念</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/atom.xml">Rss</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ZacksTsang" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ZacksTsang" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/ceng-shao-jia" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/App/" style="font-size: 20px;">App</a> <a href="/tags/Deploy/" style="font-size: 14px;">Deploy</a> <a href="/tags/Gulp/" style="font-size: 10px;">Gulp</a> <a href="/tags/Jenkins/" style="font-size: 14px;">Jenkins</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/UI/" style="font-size: 18px;">UI</a> <a href="/tags/UI-Test/" style="font-size: 10px;">UI Test</a> <a href="/tags/UIFont/" style="font-size: 10px;">UIFont</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/iOS/" style="font-size: 18px;">iOS</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/objective-c/" style="font-size: 16px;">objective-c</a> <a href="/tags/project/" style="font-size: 10px;">project</a> <a href="/tags/skill/" style="font-size: 12px;">skill</a> <a href="/tags/旅游/" style="font-size: 10px;">旅游</a> <a href="/tags/签证/" style="font-size: 10px;">签证</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">名副其实的全栈工程狮，写过前后端，但目前对前端知识涉猎比较深。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Zacks Tsang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xt3qs.com2.z0.glb.clouddn.com/avator.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Zacks Tsang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">iOS、Android、前端的碎碎念</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/atom.xml">Rss</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ZacksTsang" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ZacksTsang" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/ceng-shao-jia" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-web-base" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/04/01/web-base/" class="article-date">
+  	<time datetime="2022-04-01T05:45:23.000Z" itemprop="datePublished">2022-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Web 入门指引
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deploy/">Deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jenkins/">Jenkins</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Jenkins/">Jenkins</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前想快速入门 web 这块需要从其官网入手，我们面向用户端主要使用 vue，面向管理平台主要是 ant design pro。</p>
+<p>几个重要概念要提前了解，SPA、SSR、proxy、浏览器缓存、router</p>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li><a href="http://es6.ruanyifeng.com/#docs/style" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/style</a></li>
+<li><a href="https://www.typescriptlang.org/" target="_blank" rel="external">https://www.typescriptlang.org/</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web</a></li>
+</ul>
+<h3 id="Node-版本工具"><a href="#Node-版本工具" class="headerlink" title="Node 版本工具"></a>Node 版本工具</h3><ul>
+<li><code>nvm</code></li>
+</ul>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><ul>
+<li><a href="https://cn.vuejs.org/index.html" target="_blank" rel="external">https://cn.vuejs.org/index.html</a></li>
+<li><a href="https://vuex.vuejs.org/zh/guide/getters.html" target="_blank" rel="external">https://vuex.vuejs.org/zh/guide/getters.html</a></li>
+<li><a href="https://router.vuejs.org/zh/" target="_blank" rel="external">https://router.vuejs.org/zh/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/106004378" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/106004378</a></li>
+</ul>
+<h3 id="Vue3-0"><a href="#Vue3-0" class="headerlink" title="Vue3.0"></a>Vue3.0</h3><ul>
+<li><a href="https://vue3js.cn/docs/zh/" target="_blank" rel="external">https://vue3js.cn/docs/zh/</a></li>
+</ul>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><ul>
+<li><a href="https://reactjs.org/" target="_blank" rel="external">https://reactjs.org/</a></li>
+<li><a href="https://dvajs.com/" target="_blank" rel="external">https://dvajs.com/</a></li>
+<li><a href="https://pro.ant.design/" target="_blank" rel="external">https://pro.ant.design/</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1635451" target="_blank" rel="external">https://cloud.tencent.com/developer/article/1635451</a></li>
+</ul>
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><p><a href="https://nervjs.github.io/taro/docs/README/" target="_blank" rel="external">https://nervjs.github.io/taro/docs/README/</a></p>
+<h2 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h2><p><a href="https://web.dev/progressive-web-apps/" target="_blank" rel="external">web.dev</a></p>
+<h2 id="微前端"><a href="#微前端" class="headerlink" title="微前端"></a>微前端</h2><ul>
+<li><p><a href="https://qiankun.umijs.org/zh/guide" target="_blank" rel="external">乾坤介绍</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/78362028" target="_blank" rel="external">可能是你见过最完善的微前端解决方案</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/21/jenkins-android-deploy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jenkins、Android App 持续构建的极简之道</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'zacksdev'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2022 Zacks Tsang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-50334840-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+            
+  </div>
+</body>
+</html>
