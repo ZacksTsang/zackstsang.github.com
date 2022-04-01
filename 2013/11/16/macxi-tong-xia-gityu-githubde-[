@@ -5,14 +5,14 @@
   
   <meta name="baidu-site-verification" content="Qkxd5xvYuC">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Mac系统下git与github的一些简单使用 | Zacks 的开发随想记</title>
+  <title>Mac系统下git与github的一些简单使用 | Zacks 的研发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入1$git --version回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 http://git-scm.com/downloads 下载安装 创建密钥首先，查看机器上是否存在密钥1$cd ~/.ssh如果提示：No such file or">
 <meta name="keywords" content="git,skill">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac系统下git与github的一些简单使用">
 <meta property="og:url" content="http://blog.zacksdev.com/2013/11/16/macxi-tong-xia-gityu-githubde-[">
-<meta property="og:site_name" content="Zacks 的开发随想记">
+<meta property="og:site_name" content="Zacks 的研发随想记">
 <meta property="og:description" content="Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入1$git --version回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 http://git-scm.com/downloads 下载安装 创建密钥首先，查看机器上是否存在密钥1$cd ~/.ssh如果提示：No such file or">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-04-19T13:22:21.000Z">
@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Mac系统下git与github的一些简单使用">
 <meta name="twitter:description" content="Mac系统下一般都会有git了，不用去安装。查看git的版本,在终端输入1$git --version回车后会出现：git version 1.8.3.4 (Apple Git-47)，可以看到git的版本信息。如果没有的话可以去 http://git-scm.com/downloads 下载安装 创建密钥首先，查看机器上是否存在密钥1$cd ~/.ssh如果提示：No such file or">
   
-    <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Zacks 的研发随想记" type="application/atom+xml">
   
   
     <link rel="icon" href="//favicon.ico">
@@ -45,7 +45,7 @@
 		</hgroup>
 
 		
-		<p class="header-subtitle">iOS、Android、前端的碎碎念</p>
+		<p class="header-subtitle">全栈的噩梦</p>
 		
 
 		
@@ -150,7 +150,7 @@
 			  <h1 class="header-author">Zacks Tsang</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">iOS、Android、前端的碎碎念</p>
+			<p class="header-subtitle">全栈的噩梦</p>
 			
 			<nav class="header-menu">
 				<ul>
