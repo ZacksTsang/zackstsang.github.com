@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="baidu-site-verification" content="Qkxd5xvYuC">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>【翻译】RequireJS 的基本原理 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
-
-如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+  <meta name="description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。  如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta name="keywords" content="javascript,RequireJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【翻译】RequireJS 的基本原理">
 <meta property="og:url" content="http://blog.zacksdev.com/2015/09/25/requirejs-ji-ben-yuan-li/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
-
-如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta property="og:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。  如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/gremlin-jpg-jpg">
 <meta property="og:image" content="http://www.telerik.com/sfimages/default-source/blogs/build-visual-studio-png-png">
 <meta property="og:updated_time" content="2016-04-20T08:16:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【翻译】RequireJS 的基本原理">
-<meta name="twitter:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。
-
-如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
+<meta name="twitter:description" content="本文翻译来源：http://www.telerik.com/blogs/requirejs-fundamentals此翻译如有冒犯之处，请联系我 zshaojia@gmail.com 进行删除，且本文不会用于商业用途。  如果你是一个 JavaScript 开发者，也许会见过各种各样的有关于 JavaScript 的模块。模块化开发是JavaScript的一个很热门的话题，而且会成为潮流。事实上">
 <meta name="twitter:image" content="http://www.telerik.com/sfimages/default-source/blogs/gremlin-jpg-jpg">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
@@ -34,7 +30,7 @@
   
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="container">
     <div class="left-col">

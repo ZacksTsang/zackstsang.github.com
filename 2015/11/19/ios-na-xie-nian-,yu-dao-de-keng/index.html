@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="baidu-site-verification" content="Qkxd5xvYuC">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>[iOS]那些年，遇到的坑 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。
-性能问题
-获取是否允许系统定位
-  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
+  <meta name="description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。 性能问题 获取是否允许系统定位   估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
+<meta name="keywords" content="iOS,objective-c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[iOS]那些年，遇到的坑">
 <meta property="og:url" content="http://blog.zacksdev.com/2015/11/19/ios-na-xie-nian-,yu-dao-de-keng/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。
-性能问题
-获取是否允许系统定位
-  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
+<meta property="og:description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。 性能问题 获取是否允许系统定位   估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-04-19T13:16:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[iOS]那些年，遇到的坑">
-<meta name="twitter:description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。
-性能问题
-获取是否允许系统定位
-  估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
+<meta name="twitter:description" content="我做 iOS App 开发有几年了（全栈是我本体），从看别人代码到使用别人代码，再到自己写代码，码农的气息从未减少。之前看过一篇文章，说的是程序员不配叫工程师，因为这样破坏了工程的一个悠久的历史传统——为公众利益而设计和建造的基础设施，看来我还是老老实实做回码农吧。 性能问题 获取是否允许系统定位   估计很多小伙伴们一开始都不怎么在意是否需要加变量来存这个 BOOL 值，直接使用以下这种方式进行">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
   
@@ -34,7 +27,7 @@
   
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="container">
     <div class="left-col">

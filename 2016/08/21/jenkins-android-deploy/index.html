@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <meta name="baidu-site-verification" content="Qkxd5xvYuC" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="baidu-site-verification" content="Qkxd5xvYuC">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Jenkins、Android App 持续构建的极简之道 | Zacks 的开发随想记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
-
-在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+  <meta name="description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。  在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta name="keywords" content="App,Jenkins,Deploy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jenkins、Android App 持续构建的极简之道">
 <meta property="og:url" content="http://blog.zacksdev.com/2016/08/21/jenkins-android-deploy/index.html">
 <meta property="og:site_name" content="Zacks 的开发随想记">
-<meta property="og:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
-
-在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta property="og:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。  在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_01.png?imageMogr2/thumbnail/360x">
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_03.png?imageMogr2/thumbnail/360x">
 <meta property="og:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_02.png?imageMogr2/thumbnail/360x">
@@ -24,9 +22,7 @@
 <meta property="og:updated_time" content="2016-08-21T06:04:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins、Android App 持续构建的极简之道">
-<meta name="twitter:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。
-
-在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
+<meta name="twitter:description" content="在上一篇 Jenkins、iOS App 持续构建的极简之道 中，我们已经很好地了解了如何自动化构建和发布 iOS App，那本文继续介绍 Android App 的构建之道。  在上一篇文章中，我们已经了解了 Jenkins 的一些基本的工作原理，那么在构建 Android App 的持续构建我们只需安装 gradle 插件即可，当然前提是开发 Android App 时，使用 gradle。">
 <meta name="twitter:image" content="http://7xt3qs.com2.z0.glb.clouddn.com/Jenkins_Android_01.png?imageMogr2/thumbnail/360x">
   
     <link rel="alternative" href="/atom.xml" title="Zacks 的开发随想记" type="application/atom+xml">
@@ -36,7 +32,7 @@
   
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="container">
     <div class="left-col">
